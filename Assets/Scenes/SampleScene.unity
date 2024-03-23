@@ -404,6 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turret: {fileID: 6455998246097203030, guid: 37884870e57a8c543bd4bea4819f076f, type: 3}
+  hq: {fileID: 595977877313498433, guid: e943341bbb473134599e96f4c3d46c74, type: 3}
+  barrack: {fileID: 4815505019922329747, guid: 598e9c386323b774492e4d94ef04a5ac, type: 3}
 --- !u!4 &1089501686
 Transform:
   m_ObjectHideFlags: 0
