@@ -5,15 +5,18 @@ public class PlaceBuilding : MonoBehaviour
     public GameObject turret;
     public GameObject hq;
     public GameObject barrack;
+
+    public GameObject buildSite;
     private Camera _mainCamera;
 
     private bool _placingBuilding = false;
+    private GameObject _beingPlaced;
     private GameObject _newBuilding;
     private void Awake()
     {
         _mainCamera = Camera.main;
     }
-
+    
     private void place_building()
     {
         // Look for objects at position not on Ground layer
@@ -26,7 +29,14 @@ public class PlaceBuilding : MonoBehaviour
         {
             return;
         }
-        
+
+        GameObject building = Instantiate(buildSite, _newBuilding.transform.position, Quaternion.identity);
+        var buildable = building.GetComponentInChildren<Buildable>();
+        buildable.TimeToBuild = 5f;
+        buildable.Building = _beingPlaced;
+        building.transform.GetChild(0).transform.localScale = _newBuilding.transform.GetChild(0).transform.localScale;
+        building.transform.GetChild(0).transform.position = _newBuilding.transform.GetChild(0).transform.position;
+        Destroy(_newBuilding);
         _placingBuilding = false;   
     }
 
@@ -37,6 +47,7 @@ public class PlaceBuilding : MonoBehaviour
             Destroy(_newBuilding);
         }
         _newBuilding = Instantiate(building, new Vector3(0, 0, 0), Quaternion.identity);
+        _beingPlaced = building;
         _placingBuilding = true;
     }
 
