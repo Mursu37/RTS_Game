@@ -12,11 +12,15 @@ public class UnitFollowState : StateMachineBehaviour
 
     public float attackRange = 1f;
 
+   
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         attackController = animator.transform.GetComponent<AttackController>();
         agent = animator.transform.GetComponent<NavMeshAgent>();
+
+        attackController.SetFollowMaterial();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -36,14 +40,14 @@ public class UnitFollowState : StateMachineBehaviour
                 animator.transform.LookAt(attackController.targetToAttack);
 
 
-                // should unit transition to attack state?
-                //float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
+              //  should unit transition to attack state?
+                float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
 
-                //if (distanceFromTarget < attackRange)
-                //{
-                //    agent.SetDestination(animator.transform.position);
-                //    animator.SetBool("isAttacking", true); // move to attacking state
-                //}
+                if (distanceFromTarget < attackRange)
+                {
+                    agent.SetDestination(animator.transform.position);
+                    animator.SetBool("isAttacking", true); // move to attacking state
+                }
 
             }
         }

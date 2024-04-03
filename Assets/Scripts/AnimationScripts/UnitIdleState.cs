@@ -11,6 +11,8 @@ public class UnitIdleState : StateMachineBehaviour
     {
         attackController = animator.transform.GetComponent<AttackController>();
 
+        attackController.SetIdleMaterial();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
