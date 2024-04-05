@@ -8,7 +8,6 @@ namespace Enemy
     {
         public float MaxHealth { get; set; }
         public float CurrentHealth { get; set; }
-        
         public void Damage(float amount)
         {
             CurrentHealth -= amount;
