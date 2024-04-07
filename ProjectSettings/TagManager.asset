@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Worker
   - Enemy
+  - HQ
+  - ResourceNode
+  - ResourceManager
   layers:
   - Default
   - TransparentFX
