@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,14 @@ using UnityEngine;
 
 public class Infantry : Unit
 {
-     void Start()
+    private void Awake()
     {
-        
-        healthPoints = 150f;
-        damagetest = 10f;
+        MaxHealth = 150f;
+    }
+    
+    void Start()
+    {
+        damage = 10f;
         attackRange = 4f;
         attackSpeed = 2f;
         movementSpeed = 3f;
@@ -20,7 +24,7 @@ public class Infantry : Unit
 
 
     }
-
+    
     private void OnDestroy()
     {
         UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);

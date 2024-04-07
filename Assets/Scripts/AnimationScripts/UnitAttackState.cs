@@ -11,7 +11,7 @@ public class UnitAttackState : StateMachineBehaviour
     AttackController attackController;
     Unit unit;
 
-    public float stopAttackingDistance = 1.2f; // HUOM TÄMÄN PITÄÄ OLLA ISOMPI KUIN float attackingDistance UnitFollowState.cs
+    public float stopAttackingDistance = 1.2f; // HUOM TÃ„MÃ„N PITÃ„Ã„ OLLA ISOMPI KUIN float attackingDistance UnitFollowState.cs
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
@@ -25,16 +25,16 @@ public class UnitAttackState : StateMachineBehaviour
         // check if we have target and if we didnt give another move command
         if(attackController.targetToAttack != null && animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
         {
-            // voi olla buginen myöhemmmin animaatioiden kanssa
+            // voi olla buginen myÃ¶hemmmin animaatioiden kanssa
             LookAtTarget();
 
             // moving to enemy
             agent.SetDestination(attackController.targetToAttack.position);
 
             
-            Debug.Log(unit.damagetest);
+            Debug.Log(unit.damage);
             // actually perform attack
-            float damage = unit.damagetest;
+            float damage = unit.damage;
             
             var dam = attackController.targetToAttack.GetComponent<IDamageable>();
             if(dam != null)

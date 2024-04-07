@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour, IDamageable
 {
-    public float healthPoints = 10f;
-    public float damagetest = 1f;
+    public float MaxHealth { get; set; } = 100f;
+    public float CurrentHealth { get; set; }
+    public float damage = 1f;
     public float attackRange = 1f;
     public float attackSpeed = 1f; // attacks per second
     public float movementSpeed = 2f;
@@ -18,7 +20,7 @@ public class Unit : MonoBehaviour
     void Start()
     {
         attackCooldown = 1f / attackSpeed;
-
+        CurrentHealth = MaxHealth;
         agent = GetComponent<NavMeshAgent>();
         SetupNavMeshAgent();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
@@ -45,6 +47,18 @@ public class Unit : MonoBehaviour
     //        Destroy(gameObject); 
     //    }
     //}
-
     
+    public void Damage(float amount)
+    {
+        CurrentHealth -= amount;
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
