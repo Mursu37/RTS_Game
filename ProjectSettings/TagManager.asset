@@ -9,6 +9,7 @@ TagManager:
   - HQ
   - ResourceNode
   - ResourceManager
+  - Infantry
   layers:
   - Default
   - TransparentFX

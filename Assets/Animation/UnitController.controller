@@ -266,9 +266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 1
-  idleStateMaterial: {fileID: 0}
-  followStateMaterial: {fileID: 0}
-  attackStateMaterial: {fileID: 0}
 --- !u!1101 &8410668785082084354
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
