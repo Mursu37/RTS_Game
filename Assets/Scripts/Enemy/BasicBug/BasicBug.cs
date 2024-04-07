@@ -1,4 +1,5 @@
 
+using System.Diagnostics;
 using UnityEngine.AI;
 
 namespace Enemy.BasicBug
@@ -11,7 +12,9 @@ namespace Enemy.BasicBug
 
         private void Awake()
         {
-            MaxHealth = 20f;
+            
+            MaxHealth = 2000f;
+
             agent = GetComponent<NavMeshAgent>();
             StateController = new StateController(this);
             StateController.Initialize();

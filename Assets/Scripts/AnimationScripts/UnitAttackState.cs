@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class UnitAttackState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     AttackController attackController;
+    Unit unit;
 
     public float stopAttackingDistance = 1.2f; // HUOM TÄMÄN PITÄÄ OLLA ISOMPI KUIN float attackingDistance UnitFollowState.cs
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -15,6 +17,7 @@ public class UnitAttackState : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         attackController = animator.GetComponent<AttackController>();
         attackController.SetAttackMaterial();
+        unit = animator.GetComponent<Unit>();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,10 +31,16 @@ public class UnitAttackState : StateMachineBehaviour
             // moving to enemy
             agent.SetDestination(attackController.targetToAttack.position);
 
-
             
+            Debug.Log(unit.damagetest);
             // actually perform attack
-           
+            float damage = unit.damagetest;
+            
+            var dam = attackController.targetToAttack.GetComponent<IDamageable>();
+            if(dam != null)
+            {
+                dam.Damage(damage);
+            }
 
             // should unit still attack
             float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
@@ -44,7 +53,12 @@ public class UnitAttackState : StateMachineBehaviour
 
 
         }
-        
+        if (attackController.targetToAttack == null)
+        {
+
+            animator.SetBool("isAttacking", false); // move back to follow state
+        }
+
     }
 
     private void LookAtTarget()

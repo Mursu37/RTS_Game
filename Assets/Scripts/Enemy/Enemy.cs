@@ -31,6 +31,7 @@ namespace Enemy
         private void Start()
         {
             CurrentHealth = MaxHealth;
+            Debug.Log(CurrentHealth);
         }
     }
 }
