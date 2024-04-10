@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2786577347903581440}
-  - component: {fileID: 9190816144549054485}
+  - component: {fileID: -7356353631471088357}
+  - component: {fileID: 1869862980536669931}
   m_Layer: 0
   m_Name: Barrack
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   - {fileID: 8090359354862358674}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9190816144549054485
+--- !u!114 &-7356353631471088357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +43,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4815505019922329747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcdfd08d5ae04f148a9415182f9ef4dd, type: 3}
+  m_Script: {fileID: 11500000, guid: f4d20485a2b6af94db3a5bdbe17388ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefabs:
-  - {fileID: 4044488085446428559, guid: e897f83573886ce4f9729122704112a7, type: 3}
-  spawnPoint: {fileID: 0}
-  spawnTimes:
-  - 2
+--- !u!114 &1869862980536669931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815505019922329747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a3d9eb12d432a4a92d98523c6d8472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  units:
+  - unit: {fileID: 8946025008665705224, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+    cost: 5
+  - unit: {fileID: 8946025008665705224, guid: 1f64ea91455e4a84e8e9b858b79e5d02, type: 3}
+    cost: 25
 --- !u!1 &7108157023767632840
 GameObject:
   m_ObjectHideFlags: 0
