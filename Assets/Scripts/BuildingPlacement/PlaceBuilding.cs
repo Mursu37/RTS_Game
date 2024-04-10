@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlaceBuilding : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class PlaceBuilding : MonoBehaviour
     {
         // Look for objects at position not on Ground layer
         Collider[] collisions = Physics.OverlapBox(_newBuilding.transform.position,
-            _newBuilding.GetComponentInChildren<BoxCollider>().bounds.extents + new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity,
-            ~LayerMask.GetMask("Ground"));
+            _newBuilding.GetComponentInChildren<BoxCollider>().bounds.extents + new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity,
+            ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
 
         // Collision box always collides with newly created object so we check if more than one collision occured
         if (collisions.Length > 1)
@@ -47,6 +48,8 @@ public class PlaceBuilding : MonoBehaviour
             Destroy(_newBuilding);
         }
         _newBuilding = Instantiate(building, new Vector3(0, 0, 0), Quaternion.identity);
+        _newBuilding.GetComponentInChildren<Collider>().enabled = false;
+        _newBuilding.GetComponentInChildren<NavMeshObstacle>().enabled = false;
         _beingPlaced = building;
         _placingBuilding = true;
     }
@@ -55,13 +58,9 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            set_building(hq);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
             set_building(barrack);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             set_building(turret);
         }

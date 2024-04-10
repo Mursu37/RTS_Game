@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemy.BasicBug
@@ -10,17 +12,40 @@ namespace Enemy.BasicBug
             _hq = GameObject.FindWithTag("HQ").transform.position;
         }
 
+        private void SearchForTarget()
+        {
+            Collider[] colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.aggroRange);
+            if (colliders.Length > 0)
+            {
+                float currentShortest = Mathf.Infinity;
+                foreach (var collider in colliders)
+                {
+                    var damageble = collider.GetComponent<IDamageable>();
+                    if (!collider.CompareTag("Enemy") && damageble != null)
+                    {
+                        float currentDistance = (collider.transform.position - Enemy.transform.position).magnitude;
+                        if (currentDistance < currentShortest)
+                        {
+                            Enemy.target = collider;
+                            currentShortest = currentDistance;
+                        }
+                    }
+                }
+
+                if (Enemy.target == null) return;
+                StateController.ChangeState(StateController.ChaseState);
+            }
+        }
+
         public override void OnEnter()
         {
+            _hq = GameObject.FindWithTag("HQ").transform.position;
             Enemy.agent.SetDestination(_hq);
         }
 
         public override void OnFixedUpdate()
         {
-            if (Enemy.agent.remainingDistance <= 0)
-            {
-                StateController.ChangeState(StateController.AttackState);
-            }
+            SearchForTarget();
         }
     }
 }

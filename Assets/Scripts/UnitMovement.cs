@@ -43,6 +43,7 @@ public class UnitMovement : MonoBehaviour
         {
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
+                agent.stoppingDistance = 1.5f;
                 agent.SetDestination(_hq);
                 yield return new WaitForSeconds(0.1f);
                 
@@ -65,13 +66,15 @@ public class UnitMovement : MonoBehaviour
             }
             else
             {
-                if (agent.remainingDistance > 1.5f)
+                agent.stoppingDistance = 0.5f;
+                if (agent.remainingDistance > 0.66f)
                 {
                     yield return new WaitForSeconds(0.1f);
                     continue;
                 }
                 _resourceCount += _resourceNode.Gather();
-                yield return new WaitForSeconds(1f);     
+                yield return new WaitForSeconds(1f);
+                agent.SetDestination(agent.transform.position);
             }
         }
     }
@@ -82,7 +85,6 @@ public class UnitMovement : MonoBehaviour
         {
             if (_resourceNode == null)
             {
-                Debug.Log("Hello");
                 _gathering = false;
                 StopCoroutine(Gather());
             }
@@ -112,7 +114,8 @@ public class UnitMovement : MonoBehaviour
                     
                     _resourceType = _resourceNode.ResourceType;
                     _gathering = true;
-                    _resourceLocation = hit.point;
+                    _resourceLocation = hit.transform.position;
+                    agent.SetDestination(hit.transform.position);
                     Debug.Log(_gathering);
                     StartCoroutine(Gather());
                 }
