@@ -39,7 +39,6 @@ namespace Enemy.BasicBug
 
         public override void OnEnter()
         {
-            _hq = GameObject.FindWithTag("HQ").transform.position;
             Enemy.agent.SetDestination(_hq);
         }
 
