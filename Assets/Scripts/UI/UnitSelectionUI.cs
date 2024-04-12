@@ -75,7 +75,8 @@ public class UnitSelectionUI : MonoBehaviour
     public void UpdateUIForSelectedUnit(Unit unit)
     {
         // Update each TMP_Text component with the corresponding unit stat
-        unitNameText.text = $"{unit.gameObject.name}";
+        unitNameText.text = $"{unit.gameObject.name}"; // currently takes the gameobject name in hierarchy so units are worker, worker (1), worker(2) etc. 
+                                                        // TO DO: name variable for each unit
         unitHPText.text = $"{unit.CurrentHealth} / {unit.MaxHealth}";
         damageText.text = $"Damage: {unit.damage}";
         rangeText.text = $"Range: {unit.attackRange}";
