@@ -10,6 +10,7 @@ TagManager:
   - ResourceNode
   - ResourceManager
   - Infantry
+  - BuildingPanel
   layers:
   - Default
   - TransparentFX

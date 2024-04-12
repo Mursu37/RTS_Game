@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class BuildingSelectionManager : MonoBehaviour
 {
-    private bool _buildingIsActive;
-    private Collider _activeBuilding;
+    public bool BuildingIsActive { get; private set; }
+    public Collider ActiveBuilding { get; private set; }
+    
     private Camera _camera;
 
     private bool _buildingIsClicked;
@@ -12,31 +13,31 @@ public class BuildingSelectionManager : MonoBehaviour
 
     private void Awake()
     {
-        _buildingIsActive = false;
-        _activeBuilding = null;
+        BuildingIsActive = false;
+        ActiveBuilding = null;
         _camera = Camera.main;
     }
 
     public void SelectBuilding(Collider building)
     {
-        if (_buildingIsActive)
+        if (BuildingIsActive)
         {
             UnSelectBuilding();
         }
         
         IBuilding buildingInterface = building.GetComponent<IBuilding>();
         buildingInterface.BuildingSelected();
-        _activeBuilding = building;
-        _buildingIsActive = true;
+        ActiveBuilding = building;
+        BuildingIsActive = true;
         Debug.Log("Building is selected");
     }
 
     public void UnSelectBuilding()
     {
-        IBuilding buildingInterface = _activeBuilding.GetComponent<IBuilding>();
+        IBuilding buildingInterface = ActiveBuilding.GetComponent<IBuilding>();
         buildingInterface.BuildingUnselected();
-        _activeBuilding = null;
-        _buildingIsActive = false;
+        ActiveBuilding = null;
+        BuildingIsActive = false;
         Debug.Log("Building is unselected");
     }
 
@@ -78,7 +79,7 @@ public class BuildingSelectionManager : MonoBehaviour
             _buildingClicked = null;
         }
 
-        if (_buildingIsActive)
+        if (BuildingIsActive)
         {
             // unselect building only if a new building or escape is pressed.
             if (Input.GetKeyDown(KeyCode.Escape))

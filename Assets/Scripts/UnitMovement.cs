@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class UnitMovement : MonoBehaviour
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
     }
-
+    
     IEnumerator Gather()
     {
         while (_gathering)
@@ -79,9 +80,15 @@ public class UnitMovement : MonoBehaviour
             }
         }
     }
-
+    
     private void Update()
     {
+        // HAISTA VITTU
+        if (agent.hasPath == false ||agent.remainingDistance <= agent.stoppingDistance)
+        {
+            isCommandedToMove = false;
+        }
+        
         if (_gathering)
         {
             if (_resourceNode == null)
@@ -101,10 +108,14 @@ public class UnitMovement : MonoBehaviour
             {
                 isCommandedToMove = true;
                 agent.SetDestination(hit.point);
-                _gathering = false;
-                StopCoroutine(Gather());
+                if (_gathering)
+                {
+                    _gathering = false;
+                    StopCoroutine(Gather());
+                }
             }
 
+            
             if (this.CompareTag("Worker") && Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
                 if (hit.transform.CompareTag("ResourceNode"))
@@ -119,13 +130,8 @@ public class UnitMovement : MonoBehaviour
                     agent.SetDestination(hit.transform.position);
                     Debug.Log(_gathering);
                     StartCoroutine(Gather());
-                }
+                }  
             }
-        }
-
-        if (agent.hasPath == false || agent.remainingDistance <= agent.stoppingDistance)
-        {
-            isCommandedToMove = false;
         }
     }
 

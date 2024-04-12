@@ -6,27 +6,31 @@ using UnityEngine.UIElements;
 
 namespace Buildings.ProductionBuilding
 {
-    public class NewBehaviourScript : MonoBehaviour, IBuilding
+    public class UnitProduction : MonoBehaviour, IBuilding
     {
-        [SerializeField] private List<BuildableUnit> units = new List<BuildableUnit>();
+        
         private List<BuildableUnit> _buildingQue = new List<BuildableUnit>();
         
-        private bool _canBuild;
         private float _currentBuildTimer;
+        private UnitProductionManager _productionManager;
 
         private void Awake()
         {
             _currentBuildTimer = 0f;
+            _productionManager = UnitProductionManager.Instance;
         }
 
         public void BuildingSelected()
         {
-            _canBuild = true;
+            var panel = GameObject.FindWithTag("BuildingPanel");
+            _productionManager.CanBuild = true;
+            _productionManager.ActiveBuilding = this;
         }
 
         public void BuildingUnselected()
         {
-            _canBuild = false;
+            _productionManager.CanBuild = false;
+            _productionManager.ActiveBuilding = null;
         }
 
         private void CreateNewUnit()
@@ -35,16 +39,11 @@ namespace Buildings.ProductionBuilding
             _buildingQue.RemoveAt(0);
             _currentBuildTimer = 0f;
         }
-        
-        private void Update()
+
+
+        public void AddUnitToQue(BuildableUnit unit)
         {
-            if (_canBuild)
-            {
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    _buildingQue.Add(units[0]);
-                }
-            }
+            _buildingQue.Add(unit);
         }
 
         private void FixedUpdate()
@@ -57,14 +56,6 @@ namespace Buildings.ProductionBuilding
                     CreateNewUnit();
                 }
             }
-        }
-
-        [Serializable]
-        public class BuildableUnit
-        {
-            public GameObject unit;
-            public int cost;
-            public float timeToBuild;
         }
     }
 }

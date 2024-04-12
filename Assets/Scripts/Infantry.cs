@@ -8,7 +8,7 @@ public class Infantry : Unit
 {
     private void Awake()
     {
-        MaxHealth = 150f;
+        MaxHealth = 50000f;
     }
     
     void Start()
@@ -18,6 +18,7 @@ public class Infantry : Unit
         attackSpeed = 2f;
         movementSpeed = 3f;
         attackCooldown = 1f / attackSpeed;
+        CurrentHealth = MaxHealth;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
         SetupNavMeshAgent();

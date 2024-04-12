@@ -7,11 +7,21 @@ public enum Resource
 
 public class ResourceManager : MonoBehaviour
 {
+    public static ResourceManager Instance { get; set; }
     private Dictionary<Resource, int> _resourceStorage = new Dictionary<Resource, int>();
 
     private void Awake()
     {
         _resourceStorage.Add(Resource.Titanium, 0);
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     public void AddResource(Resource resource, int amount)

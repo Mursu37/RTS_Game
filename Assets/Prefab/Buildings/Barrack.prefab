@@ -180,10 +180,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a3d9eb12d432a4a92d98523c6d8472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units:
-  - unit: {fileID: 8946025008665705224, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
-    cost: 5
-    timeToBuild: 10
-  - unit: {fileID: 8946025008665705224, guid: 1f64ea91455e4a84e8e9b858b79e5d02, type: 3}
-    cost: 25
-    timeToBuild: 20
