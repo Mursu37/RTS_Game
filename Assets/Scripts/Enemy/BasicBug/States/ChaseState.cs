@@ -32,6 +32,11 @@ namespace Enemy.BasicBug
         public override void OnEnter()
         {
             Enemy.agent.SetDestination(Enemy.target.transform.position);
+            Enemy.animator.SetTrigger("Run");
+        }
+        public override void OnExit()
+        {
+            Enemy.animator.ResetTrigger("Run");
         }
 
         public override void OnFixedUpdate()

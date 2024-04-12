@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - enemy: {fileID: 4593387078068884251, guid: f60d4678b5b663345a8c0eeb6cb95f77, type: 3}
+  - enemy: {fileID: 8344922104889914377, guid: 84730855057f142bc924643687fcb31c, type: 3}
     cost: 5
 --- !u!4 &1207467806
 Transform:

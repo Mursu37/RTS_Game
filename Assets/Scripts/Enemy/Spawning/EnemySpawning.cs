@@ -92,7 +92,7 @@ namespace Enemy.Spawning
             while (_enemiesToSpawn.Count > 0)
             {
                 Vector3 spawnPoint = GetSpawnPosition();
-                spawnPoint.y += _enemiesToSpawn[0].GetComponent<Collider>().bounds.extents.y;
+                spawnPoint.y += _enemiesToSpawn[0].GetComponentInChildren<Collider>().bounds.extents.y;
                 Instantiate(_enemiesToSpawn[0], spawnPoint, Quaternion.identity);
                 _enemiesToSpawn.RemoveAt(0);
                 yield return new WaitForSecondsRealtime(_timeBetweenSpawns);

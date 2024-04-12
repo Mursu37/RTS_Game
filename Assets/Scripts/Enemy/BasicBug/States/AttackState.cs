@@ -13,6 +13,12 @@ namespace Enemy.BasicBug
         public override void OnEnter()
         {
             _attackTimer = Enemy.attackSpeed;
+            Enemy.animator.SetTrigger("Attack");
+        }
+
+        public override void OnExit()
+        {
+            Enemy.animator.ResetTrigger("Attack");
         }
 
         private void Attack()

@@ -31,7 +31,7 @@ namespace Enemy
         public void Die()
         {
             Debug.Log("Dead");
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
         private void Awake()
