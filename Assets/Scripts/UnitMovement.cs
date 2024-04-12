@@ -43,8 +43,9 @@ public class UnitMovement : MonoBehaviour
         {
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
-                agent.stoppingDistance = 1.5f;
-                agent.SetDestination(_hq);
+                agent.stoppingDistance = 1f;
+                Vector3 targetDirection = (_hq - transform.position).normalized;
+                agent.SetDestination(_hq - (targetDirection * 0.1f));
                 yield return new WaitForSeconds(0.1f);
                 
                 if (agent.remainingDistance < 1.5f)

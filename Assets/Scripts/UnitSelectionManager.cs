@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Buildings;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class UnitSelectionManager : MonoBehaviour
 {
     public static UnitSelectionManager Instance { get; set; }
+    public BuildingSelectionManager buildingManager;
 
     public List<GameObject> allUnitsList = new List<GameObject>();
     public List<GameObject> unitsSelected = new List<GameObject>();
@@ -31,6 +33,8 @@ public class UnitSelectionManager : MonoBehaviour
             Instance = this;
             
         }
+
+        buildingManager = gameObject.AddComponent<BuildingSelectionManager>();
     }
 
     private void Start()
@@ -175,8 +179,19 @@ public class UnitSelectionManager : MonoBehaviour
     private void SelectByClicking(GameObject unit)
     {
         DeselectAll();
-        unitsSelected.Add(unit);
-        SelectUnit(unit, true);
+        
+        // if selected is building let building manager handle it
+        IBuilding building = unit.GetComponent<IBuilding>();
+        if (building != null)
+        {
+            buildingManager.SelectBuilding(unit);
+        }
+        // default action
+        else
+        {
+            unitsSelected.Add(unit);
+            SelectUnit(unit, true);   
+        }
     }
 
     private void SelectUnit(GameObject unit, bool isSelected)

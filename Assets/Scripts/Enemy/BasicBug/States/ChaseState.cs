@@ -36,7 +36,8 @@ namespace Enemy.BasicBug
 
         public override void OnFixedUpdate()
         {
-            Enemy.agent.SetDestination(Enemy.target.transform.position);
+            Vector3 targetDirection = (Enemy.target.transform.position - Enemy.transform.position).normalized * 0.1f;
+            Enemy.agent.SetDestination(Enemy.target.transform.position - targetDirection);
             CheckIfTargetInRange();
         }
     }
