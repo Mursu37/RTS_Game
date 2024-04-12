@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class Unit : MonoBehaviour, IDamageable
 {
-    public float MaxHealth { get; set; } = 100f;
+    public float MaxHealth { get; set; } = 100000f;
     public float CurrentHealth { get; set; }
     public float damage = 1f;
     public float attackRange = 1f;
