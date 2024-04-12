@@ -29,13 +29,17 @@ public class Unit : MonoBehaviour, IDamageable
     private void OnDestroy()
     {
         UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
+        if (UnitSelectionManager.Instance.unitsSelected.Contains(gameObject))
+        {
+            UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
+        }
     }
     protected void SetupNavMeshAgent()
     {
         agent.acceleration = 99999;
         agent.angularSpeed = 200;
         agent.speed = movementSpeed;
-        agent.stoppingDistance = 1.5f;
+        agent.stoppingDistance = 1f;
     }
 
 

@@ -1,5 +1,4 @@
-
-using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Enemy.BasicBug
@@ -7,15 +6,26 @@ namespace Enemy.BasicBug
     public class BasicBug : Enemy
     {
         private StateController StateController { get; set; }
+        public Collider target;
+        public float aggroRange;
+        public float attackRange;
+        public float attackSpeed;
+        public float attackDamage;
 
-        public NavMeshAgent agent;
+        //public NavMeshAgent agent;
 
         private void Awake()
         {
-            
             MaxHealth = 2000f;
-
+            aggroRange = 5f;
+            attackRange = 1f;
+            attackSpeed = 0.5f;
+            attackDamage = 10f;
+            
+            movementSpeed = 5f;
+            
             agent = GetComponent<NavMeshAgent>();
+            
             StateController = new StateController(this);
             StateController.Initialize();
         }
