@@ -184,14 +184,12 @@ public class UnitSelectionManager : MonoBehaviour
         IBuilding building = unit.GetComponent<IBuilding>();
         if (building != null)
         {
-            buildingManager.SelectBuilding(unit);
+            return;
         }
         // default action
-        else
-        {
-            unitsSelected.Add(unit);
-            SelectUnit(unit, true);   
-        }
+        unitsSelected.Add(unit);
+        SelectUnit(unit, true);   
+        
     }
 
     private void SelectUnit(GameObject unit, bool isSelected)
