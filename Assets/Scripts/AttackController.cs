@@ -18,7 +18,6 @@ public class AttackController : MonoBehaviour
         {
             targetToAttack = other.transform;
         }
-        
     }
 
     private void OnTriggerExit(Collider other)

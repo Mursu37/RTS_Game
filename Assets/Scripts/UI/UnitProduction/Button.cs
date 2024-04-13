@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 namespace UI.UnitProduction
@@ -22,6 +23,12 @@ namespace UI.UnitProduction
             _text.text = "Name: " + _productionManager.Units[index].name + "\nPrice: " +
                          _productionManager.Units[index].cost + "\nBuild time: " +
                          _productionManager.Units[index].timeToBuild;
+        }
+
+        public void OrderUnit()
+        {
+            BuildableUnit unit = _productionManager.Units[index];
+            _productionManager.MakeUnit(unit);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Buildings.ProductionBuilding
         
         private float _currentBuildTimer;
         private UnitProductionManager _productionManager;
+        [SerializeField] private GameObject panel;
 
         private void Awake()
         {
@@ -20,15 +21,21 @@ namespace Buildings.ProductionBuilding
             _productionManager = UnitProductionManager.Instance;
         }
 
+        private void Start()
+        {
+            _productionManager = UnitProductionManager.Instance;
+        }
+
         public void BuildingSelected()
         {
-            var panel = GameObject.FindWithTag("BuildingPanel");
+            panel.SetActive(true);
             _productionManager.CanBuild = true;
             _productionManager.ActiveBuilding = this;
         }
 
         public void BuildingUnselected()
         {
+            panel.SetActive(false);
             _productionManager.CanBuild = false;
             _productionManager.ActiveBuilding = null;
         }

@@ -12,7 +12,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
-        _resourceStorage.Add(Resource.Titanium, 0);
+        _resourceStorage.Add(Resource.Titanium, 500);
 
         if (Instance != null && Instance != this)
         {
@@ -27,11 +27,15 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(Resource resource, int amount)
     {
         _resourceStorage[resource] += amount;
-        Debug.Log("Resource count: " + _resourceStorage[resource]);
     }
 
     public void SpendResource(Resource resource ,int amount)
     {
-        _resourceStorage[resource] += amount;
+        _resourceStorage[resource] -= amount;
+    }
+    
+    public bool CanAfford(int amount)
+    {
+        return _resourceStorage[Resource.Titanium] >= amount;
     }
 }

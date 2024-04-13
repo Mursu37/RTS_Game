@@ -20,7 +20,7 @@ namespace Enemy.BasicBug
             AttackState = new AttackState(this, _enemy);
             SearchState = new SearchState(this, _enemy);
             
-            ChangeState(IdleState);
+            ChangeState(SearchState);
         }
     }
 }

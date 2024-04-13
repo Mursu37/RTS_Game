@@ -247,8 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28ed74a9e98d93498ebddf7a7794f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
-  damagetest: 1
+  damage: 1
   attackRange: 1
   attackSpeed: 1
   movementSpeed: 5
@@ -277,7 +276,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8946025008665705224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5697b193ab3695144aa8b53e939bce9b, type: 2}
   m_CullingMode: 0

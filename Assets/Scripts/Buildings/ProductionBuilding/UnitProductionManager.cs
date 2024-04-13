@@ -35,24 +35,19 @@ public class UnitProductionManager : MonoBehaviour
         _resourceManager = ResourceManager.Instance;
     }
 
-    public void MakeUnit()
+    public void MakeUnit(BuildableUnit unit)
     {
-        
-    }
-    
-    private void Update()
-    {
-        if (CanBuild)
+        if (_resourceManager.CanAfford(unit.cost))
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (ActiveBuilding != null)
-                {
-                    ActiveBuilding.AddUnitToQue(units[0]);
-                }
-            }
+            _resourceManager.SpendResource(Resource.Titanium ,unit.cost);
+            ActiveBuilding.AddUnitToQue(unit);
+        }
+        else
+        {
+            Debug.Log("cannot afford");
         }
     }
+    
 }
 [Serializable]
 public class BuildableUnit

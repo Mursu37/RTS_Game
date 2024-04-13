@@ -15,7 +15,10 @@ namespace Enemy.Spawning
 
         private int _waveCount;
         private int _waveValue;
+        
         private float _untilNextWave;
+        private float _timeBetweenWaves;
+        
         private Vector3 _hqLocation;
         private int _spawnRange;
         private int _minSpawnDistance;
@@ -29,6 +32,7 @@ namespace Enemy.Spawning
             _spawnRange = 100;
             _minSpawnDistance = 10;
             _waveValue = 10;
+            _timeBetweenWaves = 15f;
         }
 
         private void GenerateWave(int value)
@@ -39,7 +43,7 @@ namespace Enemy.Spawning
             {
                 int enemyIndex = Random.Range(0, _spawnableEnemies.Count);
                 SpawnableEnemy enemy = _spawnableEnemies[enemyIndex];
-                if (value - enemy.cost >= 0)
+                if (value - enemy.cost > 0)
                 {
                     value -= enemy.cost;
                     _enemiesToSpawn.Add(enemy.enemy);
@@ -49,8 +53,9 @@ namespace Enemy.Spawning
                     _spawnableEnemies.RemoveAt(enemyIndex);
                 }
             }
+            
 
-            _timeBetweenSpawns = _untilNextWave / 2 / _spawnableEnemies.Count;
+            _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 2;
         }
 
         private Vector3 GetSpawnPosition()
@@ -104,7 +109,7 @@ namespace Enemy.Spawning
             _untilNextWave -= Time.fixedDeltaTime;
             if (_untilNextWave <= 0)
             {
-                _untilNextWave = 15f;
+                _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
                 _waveValue = (int) (_waveValue * 1.5f);
                 StartCoroutine(spawnEnemies());

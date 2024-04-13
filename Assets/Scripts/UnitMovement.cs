@@ -83,7 +83,7 @@ public class UnitMovement : MonoBehaviour
     
     private void Update()
     {
-        // HAISTA VITTU
+        // HAISTA VITTU NAVMESH / CARVE
         if (agent.hasPath == false ||agent.remainingDistance <= agent.stoppingDistance)
         {
             isCommandedToMove = false;
