@@ -11,6 +11,8 @@ TagManager:
   - ResourceManager
   - Infantry
   - BuildingPanel
+  - UI
+  - UnitProductionPanel
   layers:
   - Default
   - TransparentFX

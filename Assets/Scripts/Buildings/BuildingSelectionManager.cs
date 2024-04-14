@@ -29,7 +29,6 @@ public class BuildingSelectionManager : MonoBehaviour
         buildingInterface.BuildingSelected();
         ActiveBuilding = building;
         BuildingIsActive = true;
-        Debug.Log("Building is selected");
     }
 
     public void UnSelectBuilding()
@@ -38,7 +37,6 @@ public class BuildingSelectionManager : MonoBehaviour
         buildingInterface.BuildingUnselected();
         ActiveBuilding = null;
         BuildingIsActive = false;
-        Debug.Log("Building is unselected");
     }
 
     public void Update()

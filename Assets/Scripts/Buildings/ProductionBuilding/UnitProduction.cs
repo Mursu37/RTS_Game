@@ -13,12 +13,14 @@ namespace Buildings.ProductionBuilding
         
         private float _currentBuildTimer;
         private UnitProductionManager _productionManager;
-        [SerializeField] private GameObject panel;
+        private GameObject panel;
 
         private void Awake()
         {
             _currentBuildTimer = 0f;
             _productionManager = UnitProductionManager.Instance;
+            panel = PanelManager.Instance.unitProductionPanel;
+
         }
 
         private void Start()

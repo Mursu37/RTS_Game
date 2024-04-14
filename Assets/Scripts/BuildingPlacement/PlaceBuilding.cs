@@ -1,8 +1,14 @@
+using System;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class PlaceBuilding : MonoBehaviour
 {
+    public bool mouseOverUI = false;
+    
     public GameObject turret;
     public GameObject hq;
     public GameObject barrack;
@@ -13,13 +19,34 @@ public class PlaceBuilding : MonoBehaviour
     private bool _placingBuilding = false;
     private GameObject _beingPlaced;
     private GameObject _newBuilding;
+    private int _price;
+
+    private ResourceManager _resourceManager;
+    public static PlaceBuilding Instance { get; set; }
+
     private void Awake()
     {
         _mainCamera = Camera.main;
+        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
-    
+
+    private void Start()
+    {
+        _resourceManager = ResourceManager.Instance;
+    }
+
     private void place_building()
     {
+        if (mouseOverUI) return;
+        
         // Look for objects at position not on Ground layer
         Collider[] collisions = Physics.OverlapBox(_newBuilding.transform.position,
             _newBuilding.GetComponentInChildren<BoxCollider>().bounds.extents + new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity,
@@ -31,6 +58,7 @@ public class PlaceBuilding : MonoBehaviour
             return;
         }
 
+        _resourceManager.SpendResource(Resource.Titanium , _price);
         GameObject building = Instantiate(buildSite, _newBuilding.transform.position, Quaternion.identity);
         var buildable = building.GetComponentInChildren<Buildable>();
         buildable.TimeToBuild = 5f;
@@ -41,12 +69,14 @@ public class PlaceBuilding : MonoBehaviour
         _placingBuilding = false;   
     }
 
-    private void set_building(GameObject building)
+    public void set_building(GameObject building, int price)
     {
         if (_placingBuilding)
         {
             Destroy(_newBuilding);
         }
+
+        _price = price;
         _newBuilding = Instantiate(building, new Vector3(0, 0, 0), Quaternion.identity);
         _newBuilding.GetComponentInChildren<Collider>().enabled = false;
         _newBuilding.GetComponentInChildren<NavMeshObstacle>().enabled = false;
@@ -58,11 +88,17 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            set_building(barrack);
+            if (_resourceManager.CanAfford(300))
+            {
+                set_building(barrack, 300);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            set_building(turret);
+            if (_resourceManager.CanAfford(500))
+            {
+                set_building(turret, 500);
+            }
         }
 
         if (_placingBuilding)
