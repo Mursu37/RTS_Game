@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,7 +31,7 @@ namespace Enemy.Spawning
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             _untilNextWave = 5f;
             _spawnRange = 100;
-            _minSpawnDistance = 10;
+            _minSpawnDistance = 15;
             _waveValue = 10;
             _timeBetweenWaves = 15f;
         }
@@ -60,17 +61,17 @@ namespace Enemy.Spawning
 
         private Vector3 GetSpawnPosition()
         {
-            float xPosition = Random.Range(_hqLocation.x - _spawnRange, _hqLocation.x + _spawnRange);
-            float zPosition = Random.Range(_hqLocation.z - _spawnRange, _hqLocation.z + _spawnRange);
+            float xPosition = Random.Range(-20, 35);
+            float zPosition = Random.Range(-20, 40);
             
             // if elevation is added to the map y check needs to be reworked
             float yPosition = _hqLocation.y;
             
-            if (Physics.Raycast(new Vector3(xPosition, 100, zPosition), Vector3.down, 
-                    1000f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide))
+            if (!Physics.Raycast(new Vector3(xPosition, 100, zPosition), Vector3.down,
+                    1000f, LayerMask.GetMask("Obstacle"), QueryTriggerInteraction.Collide))
             {
                 Collider[] colliders = Physics.OverlapSphere(new Vector3(xPosition, yPosition, zPosition),
-                    _minSpawnDistance, ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
+                    _minSpawnDistance, ~LayerMask.GetMask("Ground", "Obstacle"), QueryTriggerInteraction.Collide);
 
                 bool viableSpawn = true;
                 foreach (var collider in colliders)
@@ -84,11 +85,9 @@ namespace Enemy.Spawning
 
                 if (viableSpawn)
                 {
-                    _spawnRange = 100;
                     return new Vector3(xPosition, yPosition, zPosition);
                 }
             }
-            _spawnRange += 10;
             return GetSpawnPosition();
         }
 

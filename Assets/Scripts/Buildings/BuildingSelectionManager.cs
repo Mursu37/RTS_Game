@@ -1,3 +1,4 @@
+using System.Net;
 using Buildings;
 using UnityEngine;
 
@@ -50,6 +51,7 @@ public class BuildingSelectionManager : MonoBehaviour
             // hitting clickable object
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
+                if (hit.collider.transform.CompareTag("Buildable")) return;
                 var building = hit.collider.GetComponent<IBuilding>();
                 if (building != null)
                 {
@@ -59,7 +61,7 @@ public class BuildingSelectionManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && _buildingClicked)
+        if (Input.GetMouseButtonUp(0) && _buildingIsClicked)
         {
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);

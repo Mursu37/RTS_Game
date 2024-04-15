@@ -30,6 +30,7 @@ namespace UI.BuildingPlacement
 
         public void SetBuilding()
         {
+            Debug.Log("order");
             if (_resourceManager.CanAfford(price))
             {
                 _placementManager.set_building(building, price);

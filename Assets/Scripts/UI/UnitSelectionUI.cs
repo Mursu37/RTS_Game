@@ -12,7 +12,7 @@ public class UnitSelectionUI : MonoBehaviour
  
 
     private Text singleUnitText; // Assuming there's a Text component on the single unit panel
-    private Text multiUnitText; // Assuming there's a Text component on the multi unit panel
+    private TMP_Text multiUnitText; // Assuming there's a Text component on the multi unit panel
 
     [SerializeField] private TMP_Text unitNameText;
     [SerializeField] private TMP_Text unitHPText;
@@ -27,7 +27,7 @@ public class UnitSelectionUI : MonoBehaviour
     {
 
         
-
+        multiUnitText = multiUnitPanel.GetComponentInChildren<TMP_Text>();
         // Initially hide both panels
         singleUnitPanel.SetActive(false);
         multiUnitPanel.SetActive(false);
@@ -57,6 +57,7 @@ public class UnitSelectionUI : MonoBehaviour
         else if (selectedUnits.Count > 1)
         {
             // Multiple units selected, show the multiple unit view
+            multiUnitText.text = selectedUnits.Count + " Units selected";
             singleUnitPanel.SetActive(false);
             multiUnitPanel.SetActive(true);
 

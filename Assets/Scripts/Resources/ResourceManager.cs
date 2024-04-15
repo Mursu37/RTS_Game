@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class ResourceManager : MonoBehaviour
     private void Awake()
     {
         _resourceStorage.Add(Resource.Titanium, 500);
-        _resourceCounter.text = "Resource: " + _resourceStorage[Resource.Titanium];
 
         if (Instance != null && Instance != this)
         {
@@ -25,6 +25,11 @@ public class ResourceManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        _resourceCounter.text = "Resource: " + _resourceStorage[Resource.Titanium];
     }
 
     public void AddResource(Resource resource, int amount)

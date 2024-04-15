@@ -45,7 +45,6 @@ public class UnitSelectionManager : MonoBehaviour
 
     private void Update()
     {
-
         // left click
         if (Input.GetMouseButtonDown(0))
         {

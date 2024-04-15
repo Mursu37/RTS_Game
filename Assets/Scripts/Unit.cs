@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour, IDamageable
         agent.acceleration = 99999;
         agent.angularSpeed = 200;
         agent.speed = movementSpeed;
-        agent.stoppingDistance = 1f;
+        agent.stoppingDistance = 0.1f;
     }
 
 

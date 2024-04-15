@@ -25,6 +25,17 @@ public class UnitMovement : MonoBehaviour
     private Vector3 _hq;
     private Vector3 _resourceLocation;
 
+    /// <summary>
+    /// Returns short directional vector towards target position
+    /// </summary>
+    /// <param name="currentPosition"></param>
+    /// <param name="targetPosition"></param>
+    /// <returns></returns>
+    private Vector3 GetTargetDirection(Vector3 targetPosition)
+    {
+        return (targetPosition - transform.position).normalized * 0.1f;
+    }
+
     private void Awake()
     {
         _gathering = false;
@@ -44,14 +55,12 @@ public class UnitMovement : MonoBehaviour
         {
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
-                agent.stoppingDistance = 1f;
-                Vector3 targetDirection = (_hq - transform.position).normalized;
-                agent.SetDestination(_hq - (targetDirection * 0.1f));
+                agent.SetDestination(_hq - GetTargetDirection(_hq));
                 yield return new WaitForSeconds(0.1f);
                 
-                if (agent.remainingDistance < 1.5f)
+                if (agent.remainingDistance < 0.5f)
                 {
-                    var resourceManager = GameObject.FindWithTag("ResourceManager").GetComponent<ResourceManager>();
+                    var resourceManager = ResourceManager.Instance;
                     resourceManager.AddResource(_resourceType ,_resourceCount);
                     _resourceCount = 0;
                     
@@ -62,14 +71,13 @@ public class UnitMovement : MonoBehaviour
                         break;
                     }
                     
-                    agent.SetDestination(_resourceLocation);
+                    agent.SetDestination(_resourceLocation - GetTargetDirection(_resourceLocation));
                     yield return new WaitForSeconds(0.1f);
                 }
             }
             else
             {
-                agent.stoppingDistance = 0.5f;
-                if (agent.remainingDistance > 0.66f)
+                if (agent.remainingDistance > 0.5f)
                 {
                     yield return new WaitForSeconds(0.1f);
                     continue;
@@ -107,7 +115,7 @@ public class UnitMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 isCommandedToMove = true;
-                agent.SetDestination(hit.point);
+                agent.SetDestination(hit.point - GetTargetDirection(hit.point));
                 if (_gathering)
                 {
                     _gathering = false;
@@ -127,10 +135,10 @@ public class UnitMovement : MonoBehaviour
                     _resourceType = _resourceNode.ResourceType;
                     _gathering = true;
                     _resourceLocation = hit.transform.position;
-                    agent.SetDestination(hit.transform.position);
                     Debug.Log(_gathering);
                     StartCoroutine(Gather());
                 }  
+                agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
             }
         }
     }

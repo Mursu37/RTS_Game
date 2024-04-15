@@ -13,17 +13,20 @@ TagManager:
   - BuildingPanel
   - UI
   - UnitProductionPanel
+  - ResourceSpawnLocation
+  - CloseResourceSpawnLocation
+  - Buildable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
   - Ground
   - Clickable
   - Attackble
-  - ClickableBuilding
+  - 
   - 
   - 
   - 
