@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,7 +29,6 @@ namespace Enemy.Spawning
         {
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             _untilNextWave = 5f;
-            _spawnRange = 100;
             _minSpawnDistance = 15;
             _waveValue = 10;
             _timeBetweenWaves = 15f;

@@ -46,6 +46,8 @@ public class RTSCameraController : MonoBehaviour
         DEFAULT
     }
 
+    private Camera _camera;
+
     private void Start()
     {
         instance = this;
@@ -53,6 +55,8 @@ public class RTSCameraController : MonoBehaviour
         newPosition = transform.position;
 
         movementSpeed = normalSpeed;
+
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -76,6 +80,15 @@ public class RTSCameraController : MonoBehaviour
 
     void HandleCameraMovement()
     {
+        if (Input.mouseScrollDelta != Vector2.zero)
+        {
+            float cameraSize = _camera.fieldOfView + Input.mouseScrollDelta.y * -0.5f;
+            if (cameraSize is <= 20 and >= 10)
+            {
+                _camera.fieldOfView = cameraSize;
+            }
+        }
+        
         // Mouse Drag
         if (moveWithMouseDrag)
         {

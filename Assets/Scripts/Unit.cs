@@ -6,14 +6,14 @@ using UnityEngine.Serialization;
 
 public class Unit : MonoBehaviour, IDamageable
 {
-    public float MaxHealth { get; set; } = 100000f;
+    public float MaxHealth { get; set; } = 75f;
     public float CurrentHealth { get; set; }
     public float damage = 1f;
     public float attackRange = 1f;
     public float attackSpeed = 1f; // attacks per second
     public float movementSpeed = 2f;
 
-    protected float attackCooldown;
+    public float attackCooldown;
 
     protected NavMeshAgent agent;
 
@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour, IDamageable
         agent.acceleration = 99999;
         agent.angularSpeed = 200;
         agent.speed = movementSpeed;
-        agent.stoppingDistance = 0.1f;
+        agent.stoppingDistance = 0.5f;
     }
 
 
@@ -63,6 +63,11 @@ public class Unit : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
+        if (GetComponent<UnitMovement>() != null)
+        {
+            UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
+        }
         Destroy(gameObject);
     }
 }

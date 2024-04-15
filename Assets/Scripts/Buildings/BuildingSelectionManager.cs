@@ -25,7 +25,7 @@ public class BuildingSelectionManager : MonoBehaviour
         {
             UnSelectBuilding();
         }
-        
+        Debug.Log("Hello");
         IBuilding buildingInterface = building.GetComponent<IBuilding>();
         buildingInterface.BuildingSelected();
         ActiveBuilding = building;
@@ -52,6 +52,7 @@ public class BuildingSelectionManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
                 if (hit.collider.transform.CompareTag("Buildable")) return;
+                Debug.Log("Hello");
                 var building = hit.collider.GetComponent<IBuilding>();
                 if (building != null)
                 {

@@ -13,6 +13,12 @@ public class UnitIdleState : StateMachineBehaviour
 
         attackController.SetIdleMaterial();
 
+        var colliders = Physics.OverlapSphere(animator.transform.position, 10 * 0.2f, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
+        if (colliders.Length > 0)
+        {
+            attackController.targetToAttack = colliders[0].transform;
+        }
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

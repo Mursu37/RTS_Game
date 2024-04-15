@@ -12,7 +12,7 @@ public class UnitProductionManager : MonoBehaviour
     
     private ResourceManager _resourceManager;
 
-    public UnitProduction ActiveBuilding { get; set; }
+    public ProductionBuilding ActiveBuilding { get; set; }
     public bool CanBuild { get; set; }
 
     [SerializeField] private List<BuildableUnit> units = new List<BuildableUnit>();
@@ -40,6 +40,7 @@ public class UnitProductionManager : MonoBehaviour
         if (_resourceManager.CanAfford(unit.cost))
         {
             _resourceManager.SpendResource(Resource.Titanium ,unit.cost);
+            unit.cost += 5;
             ActiveBuilding.AddUnitToQue(unit);
         }
         else

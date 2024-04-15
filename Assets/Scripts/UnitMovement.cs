@@ -58,7 +58,7 @@ public class UnitMovement : MonoBehaviour
                 agent.SetDestination(_hq - GetTargetDirection(_hq));
                 yield return new WaitForSeconds(0.1f);
                 
-                if (agent.remainingDistance < 0.5f)
+                if (agent.remainingDistance <= 0.5f)
                 {
                     var resourceManager = ResourceManager.Instance;
                     resourceManager.AddResource(_resourceType ,_resourceCount);

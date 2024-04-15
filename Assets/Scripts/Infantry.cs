@@ -8,12 +8,12 @@ public class Infantry : Unit
 {
     private void Awake()
     {
-        MaxHealth = 50000f;
+        MaxHealth = 100f;
     }
     
     void Start()
     {
-        damage = 10f;
+        damage = 5f;
         attackRange = 4f;
         attackSpeed = 2f;
         movementSpeed = 3f;

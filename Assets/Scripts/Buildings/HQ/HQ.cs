@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Buildings.HQ
 {
@@ -10,7 +11,7 @@ namespace Buildings.HQ
 
         private void Awake()
         {
-            MaxHealth = 10000f;
+            MaxHealth = 1000f;
             CurrentHealth = MaxHealth;
         }
 
@@ -25,6 +26,7 @@ namespace Buildings.HQ
 
         public void Die()
         {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             Destroy(gameObject);
         }
     }

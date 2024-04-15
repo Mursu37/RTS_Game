@@ -22,6 +22,7 @@ public class PanelManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public GameObject buildingPanel;
     public GameObject unitProductionPanel;
+    public GameObject buildingQue;
     private void Awake()
     {
         if (Instance != null && Instance != this)

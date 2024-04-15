@@ -18,11 +18,11 @@ namespace Enemy.BasicBug
 
         private void Awake()
         {
-            MaxHealth = 2000f;
+            MaxHealth = 50f;
             aggroRange = 5f;
             attackRange = 1f;
-            attackSpeed = 0.5f;
-            attackDamage = 10f;
+            attackSpeed = 0.625f;
+            attackDamage = 4f;
             
             movementSpeed = 5f;
             
