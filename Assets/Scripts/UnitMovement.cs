@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Buildings;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -26,6 +27,7 @@ public class UnitMovement : MonoBehaviour
     private Collider _resourceNodeCollider;
     private Vector3 _hq;
     private Vector3 _resourceLocation;
+    [SerializeField] private TMP_Text resourceText;
     
     // Repairing
     private bool _repairing;
@@ -96,6 +98,7 @@ public class UnitMovement : MonoBehaviour
                     var resourceManager = ResourceManager.Instance;
                     resourceManager.AddResource(_resourceType ,_resourceCount);
                     _resourceCount = 0;
+                    resourceText.text = _resourceCount + " / " + _resourceLimit;
                     
                     if (_resourceNodeCollider == null)
                     {
@@ -116,10 +119,13 @@ public class UnitMovement : MonoBehaviour
                     continue;
                 }
                 _resourceCount += _resourceNode.Gather();
+                resourceText.text = _resourceCount + " / " + _resourceLimit;
                 yield return new WaitForSeconds(1f);
                 agent.SetDestination(agent.transform.position);
             }
         }
+
+        resourceText.text = "";
     }
     
     private void Update()
