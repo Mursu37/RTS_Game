@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.AI;
 
 namespace Buildings.ProductionBuilding
 {
@@ -14,11 +16,20 @@ namespace Buildings.ProductionBuilding
 
         private GameObject _buildingQuePanel;
         private TMP_Text _buildingQueText;
+
+        private bool _active;
+        private Camera _mainCamera;
+        private Vector3 _rallyPoint;
+        [SerializeField] private GameObject rallyPointVisual;
         
         private void Awake()
         {
             MaxHealth = 350f;
             _currentBuildTimer = 0f;
+            _active = false;
+            _mainCamera = Camera.main;
+            
+            rallyPointVisual.SetActive(false);
         }
         
         protected override void Start()
@@ -40,6 +51,9 @@ namespace Buildings.ProductionBuilding
             
             _productionManager.CanBuild = true;
             _productionManager.ActiveBuilding = this;
+
+            _active = true;
+            rallyPointVisual.SetActive(true);
         }
 
         public override void BuildingUnselected()
@@ -48,11 +62,19 @@ namespace Buildings.ProductionBuilding
             _buildingQuePanel.SetActive(false);
             _productionManager.CanBuild = false;
             _productionManager.ActiveBuilding = null;
+
+            _active = false;
+            rallyPointVisual.SetActive(false);
         }
 
         private void CreateNewUnit()
         {
-            Instantiate(_buildingQue[0].unit, transform.position + Vector3.down, Quaternion.identity);
+            // get size of building and unit to calculate spawning position
+            Vector3 size = _buildingQue[0].unit.GetComponentInChildren<Collider>().bounds.extents +
+                           GetComponent<Collider>().bounds.extents;
+            
+            var newUnit = Instantiate(_buildingQue[0].unit, transform.position - new Vector3(0, 0, size.z + 0.5f), Quaternion.identity);
+            if (_rallyPoint != Vector3.zero) newUnit.GetComponentInChildren<NavMeshAgent>().SetDestination(_rallyPoint);
             _buildingQue.RemoveAt(0);
             _currentBuildTimer = 0f;
             SetBuildingQueText();
@@ -79,6 +101,28 @@ namespace Buildings.ProductionBuilding
             {
                 int amountMore = _buildingQue.Count - 3;
                 _buildingQueText.text += "\n" + amountMore + " more units";
+            }
+        }
+
+        private void Update()
+        {
+            if (_active)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,
+                            Mathf.Infinity,
+                            LayerMask.GetMask("Ground")))
+                    {
+                        _rallyPoint = hit.point;
+                        rallyPointVisual.transform.position = hit.point;
+                    }
+                }
+
+                if (_buildingQue.Count > 0)
+                {
+                    UI.UnitProduction.UnitProductionProgressBar.Instance.UpdateBarProgress(_currentBuildTimer, _buildingQue[0].timeToBuild);
+                }
             }
         }
 

@@ -10,11 +10,13 @@ public class PanelManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         PlaceBuilding.Instance.mouseOverUI = true;
+        mouseOverUI = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         PlaceBuilding.Instance.mouseOverUI = false;
+        mouseOverUI = false;
     }
     // I dont like this way of doing this but accessing inactive objectives is impossible otherwise
     
@@ -23,6 +25,8 @@ public class PanelManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject buildingPanel;
     public GameObject unitProductionPanel;
     public GameObject buildingQue;
+
+    public bool mouseOverUI;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,5 +37,7 @@ public class PanelManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             Instance = this;
         }
+
+        mouseOverUI = false;
     }
 }

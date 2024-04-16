@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Buildings;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -45,6 +46,7 @@ public class UnitSelectionManager : MonoBehaviour
 
     private void Update()
     {
+        if (PanelManager.Instance.mouseOverUI) return;
         // left click
         if (Input.GetMouseButtonDown(0))
         {
@@ -103,7 +105,6 @@ public class UnitSelectionManager : MonoBehaviour
             // hitting clickable object
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, attackble))
             {
-                Debug.Log("Enemy hovered with mouse");
 
                 attackCursorVisible = true;
 
@@ -157,6 +158,10 @@ public class UnitSelectionManager : MonoBehaviour
 
     public void DeselectAll()
     {
+        if (buildingManager.BuildingIsActive)
+        {
+            buildingManager.UnSelectBuilding();
+        }
         foreach (var unit in unitsSelected)
         {
             SelectUnit(unit, false);

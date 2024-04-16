@@ -47,11 +47,10 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (mouseOverUI) return;
         
-        
         _newBuilding.GetComponentInChildren<Collider>().enabled = true;
         // Look for objects at position not on Ground layer
         Collider[] collisions = Physics.OverlapBox(_newBuilding.transform.position,
-            _newBuilding.GetComponentInChildren<Collider>().bounds.extents, Quaternion.identity,
+            _newBuilding.GetComponentInChildren<Collider>().bounds.extents + new Vector3(1, 1, 1), Quaternion.identity,
             ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
         
         // Collision box always collides with newly created object so we check if more than one collision occured

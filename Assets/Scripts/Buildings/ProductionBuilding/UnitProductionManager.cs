@@ -47,7 +47,6 @@ public class UnitProductionManager : MonoBehaviour
             Debug.Log("cannot afford");
         }
     }
-    
 }
 [Serializable]
 public class BuildableUnit
