@@ -40,7 +40,6 @@ public class UnitProductionManager : MonoBehaviour
         if (_resourceManager.CanAfford(unit.cost))
         {
             _resourceManager.SpendResource(Resource.Titanium ,unit.cost);
-            unit.cost += 5;
             ActiveBuilding.AddUnitToQue(unit);
         }
         else
