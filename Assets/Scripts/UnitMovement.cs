@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Buildings;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -14,6 +15,8 @@ public class UnitMovement : MonoBehaviour
 
     public bool isCommandedToMove;
 
+    // TODO Move Gathering and Repairing to state machine
+    // Gathering
     private bool _gathering;
     private bool _returningResources;
     private int _resourceCount;
@@ -21,9 +24,14 @@ public class UnitMovement : MonoBehaviour
     private Resource _resourceType;
     private IGatherable _resourceNode;
     private Collider _resourceNodeCollider;
-    
     private Vector3 _hq;
     private Vector3 _resourceLocation;
+    
+    // Repairing
+    private bool _repairing;
+    private IDamageable _building;
+    private float _repairSpeed;
+    private int _repairedAmount;
 
     /// <summary>
     /// Returns short directional vector towards target position
@@ -40,6 +48,11 @@ public class UnitMovement : MonoBehaviour
     {
         _gathering = false;
         _resourceLimit = 10;
+
+        _repairing = false;
+        _repairedAmount = 0;
+        // repair 2.5 times a second. repairs one health at a time
+        _repairSpeed = 1 / 2.5f;
         _hq = GameObject.FindWithTag("HQ").transform.position;
     }
 
@@ -47,6 +60,26 @@ public class UnitMovement : MonoBehaviour
     {
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    IEnumerator Repair()
+    {
+        while (_repairing)
+        {
+            yield return new WaitForSeconds(_repairSpeed);
+            if (agent.remainingDistance <= 0.5f)
+            {
+                if (!ResourceManager.Instance.CanAfford(1) || _building.CurrentHealth >= _building.MaxHealth) break; 
+                _building.Heal(1f);
+                _repairedAmount++;
+                if (_repairedAmount > 10)
+                {
+                    ResourceManager.Instance.SpendResource(Resource.Titanium ,1);
+                    _repairedAmount = 0;
+                }
+            }
+            yield return new WaitForFixedUpdate();
+        }
     }
     
     IEnumerator Gather()
@@ -121,6 +154,8 @@ public class UnitMovement : MonoBehaviour
                     _gathering = false;
                     StopCoroutine(Gather());
                 }
+
+                _repairing = false;
             }
 
             
@@ -136,7 +171,14 @@ public class UnitMovement : MonoBehaviour
                     _gathering = true;
                     _resourceLocation = hit.transform.position;
                     StartCoroutine(Gather());
-                }  
+                }
+                else if (hit.collider.GetComponent<IBuilding>() != null)
+                {
+                    _building = hit.collider.GetComponent<IDamageable>();
+                    _repairing = true;
+                    StartCoroutine(Repair());
+                }
+                
                 agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
             }
         }

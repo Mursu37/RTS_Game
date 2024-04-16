@@ -4,35 +4,9 @@ using TMPro;
 
 namespace Buildings.ProductionBuilding
 {
-    public class ProductionBuilding : MonoBehaviour, IDamageable, IBuilding
+    public class ProductionBuilding : Building
     {
-        public float MaxHealth { get; set; }
-        public float CurrentHealth { get; set; }
-
-        private void Awake()
-        {
-            MaxHealth = 350f;
-            CurrentHealth = MaxHealth;
-            
-            _currentBuildTimer = 0f;
-        }
-
-        public void Damage(float amount)
-        {
-            CurrentHealth -= amount;
-            if (CurrentHealth < 0)
-            {
-                Die();
-            }
-        }
-
-        public void Die()
-        {
-            BuildingUnselected();
-            Destroy(gameObject);
-        }
-        
-         private List<BuildableUnit> _buildingQue = new List<BuildableUnit>();
+        private List<BuildableUnit> _buildingQue = new List<BuildableUnit>();
         
         private float _currentBuildTimer;
         private UnitProductionManager _productionManager;
@@ -40,16 +14,24 @@ namespace Buildings.ProductionBuilding
 
         private GameObject _buildingQuePanel;
         private TMP_Text _buildingQueText;
-
-        private void Start()
+        
+        private void Awake()
         {
+            MaxHealth = 350f;
+            _currentBuildTimer = 0f;
+        }
+        
+        protected override void Start()
+        {
+            base.Start();
             _productionManager = UnitProductionManager.Instance;
             panel = PanelManager.Instance.unitProductionPanel;
             _buildingQuePanel = PanelManager.Instance.buildingQue;
         }
 
-        public void BuildingSelected()
+        public override void BuildingSelected()
         {
+            // Move panels to building selection manager?
             panel.SetActive(true);
             
             _buildingQuePanel.SetActive(true);
@@ -60,7 +42,7 @@ namespace Buildings.ProductionBuilding
             _productionManager.ActiveBuilding = this;
         }
 
-        public void BuildingUnselected()
+        public override void BuildingUnselected()
         {
             panel.SetActive(false);
             _buildingQuePanel.SetActive(false);

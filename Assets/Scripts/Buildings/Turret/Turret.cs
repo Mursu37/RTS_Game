@@ -3,11 +3,8 @@ using UnityEngine;
 
 namespace Buildings.Turret
 {
-    public class Turret : MonoBehaviour, IDamageable
+    public class Turret : Building
     {
-        public float MaxHealth { get; set; }
-        public float CurrentHealth { get; set; }
-
         private Collider _target;
         private float _attackDamage;
         private float _attackSpeed;
@@ -22,7 +19,6 @@ namespace Buildings.Turret
         private void Awake()
         {
             MaxHealth = 400f;
-            CurrentHealth = MaxHealth;
 
             _attackDamage = 5f;
             _attackSpeed = 0.5f;
@@ -32,20 +28,6 @@ namespace Buildings.Turret
             _turretOn = true;
 
             StartCoroutine(SearchAndDestroy());
-        }
-
-        public void Damage(float amount)
-        {
-            CurrentHealth -= amount;
-            if (CurrentHealth < 0)
-            {
-                Die();
-            }
-        }
-
-        public void Die()
-        {
-            Destroy(gameObject);
         }
 
         IEnumerator SearchAndDestroy()

@@ -61,6 +61,15 @@ public class Unit : MonoBehaviour, IDamageable
             Die();
         }
     }
+    
+    public void Heal(float amount)
+    {
+        CurrentHealth += amount;
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
+    }
 
     public void Die()
     {

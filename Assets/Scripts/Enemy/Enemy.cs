@@ -20,6 +20,15 @@ namespace Enemy
             }
         }
         
+        public void Heal(float amount)
+        {
+            CurrentHealth += amount;
+            if (CurrentHealth > MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+        }
+        
         protected virtual void SetupNavMeshAgent()
         {
             agent.acceleration = 99999;
@@ -30,7 +39,6 @@ namespace Enemy
         
         public void Die()
         {
-            Debug.Log("Dead");
             Destroy(transform.parent.gameObject);
         }
 

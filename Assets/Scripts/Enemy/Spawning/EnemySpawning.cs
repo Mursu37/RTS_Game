@@ -29,7 +29,7 @@ namespace Enemy.Spawning
         {
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             _untilNextWave = 60f;
-            _minSpawnDistance = 15;
+            _minSpawnDistance = 10;
             _waveValue = 10;
             _timeBetweenWaves = 45f;
         }
