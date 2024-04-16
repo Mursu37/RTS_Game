@@ -42,6 +42,7 @@ namespace Buildings.ProductionBuilding
 
         public override void BuildingSelected()
         {
+            indicator.SetActive(true);
             // Move panels to building selection manager?
             panel.SetActive(true);
             
@@ -58,6 +59,7 @@ namespace Buildings.ProductionBuilding
 
         public override void BuildingUnselected()
         {
+            indicator.SetActive(false);
             panel.SetActive(false);
             _buildingQuePanel.SetActive(false);
             _productionManager.CanBuild = false;

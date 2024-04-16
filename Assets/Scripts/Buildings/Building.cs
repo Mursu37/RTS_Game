@@ -8,6 +8,8 @@ namespace Buildings
         public float MaxHealth { get; set; }
         public float CurrentHealth { get; set; }
 
+        [SerializeField] protected GameObject indicator;
+
         protected virtual void Start()
         {
             CurrentHealth = MaxHealth;
