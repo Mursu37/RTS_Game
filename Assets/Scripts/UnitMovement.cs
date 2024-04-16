@@ -91,7 +91,8 @@ public class UnitMovement : MonoBehaviour
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
                 agent.SetDestination(_hq - GetTargetDirection(_hq));
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForFixedUpdate();
+                yield return new WaitForFixedUpdate();
                 
                 if (agent.remainingDistance <= 0.5f)
                 {
@@ -103,11 +104,14 @@ public class UnitMovement : MonoBehaviour
                     if (_resourceNodeCollider == null)
                     {
                         _gathering = false;
-                        StopCoroutine(Gather());
                         break;
                     }
                     
                     agent.SetDestination(_resourceLocation - GetTargetDirection(_resourceLocation));
+                    yield return new WaitForFixedUpdate();
+                }
+                else
+                {
                     yield return new WaitForSeconds(0.1f);
                 }
             }
@@ -141,7 +145,6 @@ public class UnitMovement : MonoBehaviour
             if (_resourceNode == null)
             {
                 _gathering = false;
-                StopCoroutine(Gather());
             }
         }
         
@@ -150,24 +153,11 @@ public class UnitMovement : MonoBehaviour
            
             RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
-            {
-                isCommandedToMove = true;
-                agent.SetDestination(hit.point - GetTargetDirection(hit.point));
-                if (_gathering)
-                {
-                    _gathering = false;
-                    StopCoroutine(Gather());
-                }
-
-                _repairing = false;
-            }
-
             
             if (this.CompareTag("Worker") && Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
-                if (hit.transform.CompareTag("ResourceNode"))
+                isCommandedToMove = true;
+                if (hit.transform.CompareTag("ResourceNode") && !_gathering)
                 {
                     _resourceNode = hit.collider.GetComponent<IGatherable>();
                     _resourceNodeCollider = hit.collider;
@@ -178,7 +168,7 @@ public class UnitMovement : MonoBehaviour
                     _resourceLocation = hit.transform.position;
                     StartCoroutine(Gather());
                 }
-                else if (hit.collider.GetComponent<IBuilding>() != null)
+                else if (hit.collider.GetComponent<IBuilding>() != null && !_repairing)
                 {
                     _building = hit.collider.GetComponent<IDamageable>();
                     _repairing = true;
@@ -186,6 +176,14 @@ public class UnitMovement : MonoBehaviour
                 }
                 
                 agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
+            }
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+            {
+                isCommandedToMove = true;
+                agent.SetDestination(hit.point - GetTargetDirection(hit.point));
+                
+                _gathering = false;
+                _repairing = false;
             }
         }
     }

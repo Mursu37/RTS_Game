@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -49,12 +52,28 @@ public class PlaceBuilding : MonoBehaviour
         
         _newBuilding.GetComponentInChildren<Collider>().enabled = true;
         // Look for objects at position not on Ground layer
-        Collider[] collisions = Physics.OverlapBox(_newBuilding.transform.position,
+        var collisions = Physics.OverlapBox(_newBuilding.transform.position,
             _newBuilding.GetComponentInChildren<Collider>().bounds.extents + new Vector3(1, 1, 1), Quaternion.identity,
             ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
+
+        // Spaghetti but i just couldnt figure out how to do this any smarter with the way units are made
+        var curatedCollisions = new List<Collider>();
+
+        foreach (var collider in collisions)
+        {
+            if (collider.GetComponent<Unit>() == null)
+            {
+                curatedCollisions.Add(collider);
+                continue;
+            }
+            if ((collider.bounds.center - _newBuilding.transform.position).magnitude <= 2f)
+            {
+                curatedCollisions.Add(collider);
+            }
+        }
         
         // Collision box always collides with newly created object so we check if more than one collision occured
-        if (collisions.Length > 1)
+        if (curatedCollisions.Count > 1)
         {
             _newBuilding.GetComponentInChildren<Collider>().enabled = false;
             return;
@@ -82,6 +101,7 @@ public class PlaceBuilding : MonoBehaviour
         _newBuilding = Instantiate(building, new Vector3(0, 0, 0), Quaternion.identity);
         _newBuilding.GetComponentInChildren<Collider>().enabled = false;
         _newBuilding.GetComponentInChildren<NavMeshObstacle>().enabled = false;
+        _newBuilding.GetComponentInChildren<Buildings.Building>().enabled = false;
         _beingPlaced = building;
         _placingBuilding = true;
     }

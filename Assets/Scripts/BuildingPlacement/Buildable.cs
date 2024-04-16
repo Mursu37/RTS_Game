@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Buildings;
 using UnityEngine;
 
-public class Buildable : MonoBehaviour, IBuilding
+public class Buildable : MonoBehaviour
 {
     public GameObject Building { get; set; }
     public float TimeToBuild { get; set; }
@@ -42,15 +42,5 @@ public class Buildable : MonoBehaviour, IBuilding
                 TimeToBuild -= Time.fixedDeltaTime;
             }
         }
-    }
-
-    public void BuildingSelected()
-    {
-        return;
-    }
-
-    public void BuildingUnselected()
-    {
-        return;
     }
 }

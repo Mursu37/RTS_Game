@@ -26,7 +26,11 @@ namespace Buildings.Turret
 
             _searchingForTarget = true;
             _turretOn = true;
+        }
 
+        protected override void Start()
+        {
+            base.Start();
             StartCoroutine(SearchAndDestroy());
         }
 
