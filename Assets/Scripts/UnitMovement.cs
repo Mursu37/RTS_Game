@@ -135,7 +135,6 @@ public class UnitMovement : MonoBehaviour
                     _resourceType = _resourceNode.ResourceType;
                     _gathering = true;
                     _resourceLocation = hit.transform.position;
-                    Debug.Log(_gathering);
                     StartCoroutine(Gather());
                 }  
                 agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));

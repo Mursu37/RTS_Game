@@ -19,6 +19,7 @@ public class Unit : MonoBehaviour, IDamageable
 
     void Start()
     {
+        movementSpeed = 5f;
         attackCooldown = 1f / attackSpeed;
         CurrentHealth = MaxHealth;
         agent = GetComponent<NavMeshAgent>();
@@ -63,11 +64,6 @@ public class Unit : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
-        if (GetComponent<UnitMovement>() != null)
-        {
-            UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
-        }
         Destroy(gameObject);
     }
 }

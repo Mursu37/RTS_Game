@@ -13,7 +13,7 @@ public class Infantry : Unit
     
     void Start()
     {
-        damage = 5f;
+        damage = 6f;
         attackRange = 4f;
         attackSpeed = 2f;
         movementSpeed = 3f;
@@ -29,6 +29,10 @@ public class Infantry : Unit
     private void OnDestroy()
     {
         UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
+        if (UnitSelectionManager.Instance.unitsSelected.Contains(gameObject))
+        { 
+            UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
+        }
     }
 
     //// Override the TakeDamage method if the infantry has unique behavior when taking damage

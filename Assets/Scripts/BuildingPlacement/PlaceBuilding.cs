@@ -47,14 +47,17 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (mouseOverUI) return;
         
+        
+        _newBuilding.GetComponentInChildren<Collider>().enabled = true;
         // Look for objects at position not on Ground layer
         Collider[] collisions = Physics.OverlapBox(_newBuilding.transform.position,
-            _newBuilding.GetComponentInChildren<BoxCollider>().bounds.extents + new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity,
+            _newBuilding.GetComponentInChildren<Collider>().bounds.extents, Quaternion.identity,
             ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
-
+        
         // Collision box always collides with newly created object so we check if more than one collision occured
         if (collisions.Length > 1)
         {
+            _newBuilding.GetComponentInChildren<Collider>().enabled = false;
             return;
         }
 
@@ -88,16 +91,16 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (_resourceManager.CanAfford(300))
+            if (_resourceManager.CanAfford(60))
             {
-                set_building(barrack, 300);
+                set_building(barrack, 60);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_resourceManager.CanAfford(500))
+            if (_resourceManager.CanAfford(100))
             {
-                set_building(turret, 500);
+                set_building(turret, 100);
             }
         }
 

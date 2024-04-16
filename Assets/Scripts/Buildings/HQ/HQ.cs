@@ -11,7 +11,7 @@ namespace Buildings.HQ
 
         private void Awake()
         {
-            MaxHealth = 1000f;
+            MaxHealth = 500f;
             CurrentHealth = MaxHealth;
         }
 

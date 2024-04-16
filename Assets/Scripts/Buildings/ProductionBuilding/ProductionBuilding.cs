@@ -11,7 +11,7 @@ namespace Buildings.ProductionBuilding
 
         private void Awake()
         {
-            MaxHealth = 5000f;
+            MaxHealth = 350f;
             CurrentHealth = MaxHealth;
             
             _currentBuildTimer = 0f;

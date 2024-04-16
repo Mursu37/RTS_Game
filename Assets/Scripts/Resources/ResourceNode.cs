@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 public class TitaniumNode : MonoBehaviour, IGatherable
 {
-    private int _resourcesBeforeDepletion = 300;
+    private int _resourcesBeforeDepletion = 600;
     public Resource ResourceType { get; set; } = Resource.Titanium;
     public int Gather()
     {

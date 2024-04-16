@@ -180,11 +180,8 @@ public class UnitSelectionManager : MonoBehaviour
         DeselectAll();
         
         // if selected is building let building manager handle it
-        IBuilding building = unit.GetComponent<IBuilding>();
-        if (building != null)
-        {
-            return;
-        }
+        Unit unitCheck = unit.GetComponent<Unit>();
+        if (unitCheck == null) return;
         // default action
         unitsSelected.Add(unit);
         SelectUnit(unit, true);   

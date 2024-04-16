@@ -24,7 +24,7 @@ namespace Enemy.BasicBug
             attackSpeed = 0.625f;
             attackDamage = 4f;
             
-            movementSpeed = 5f;
+            movementSpeed = 4f;
             
             agent = GetComponent<NavMeshAgent>();
 

@@ -17,12 +17,22 @@ namespace UI.UnitProduction
             _text = GetComponentInChildren<TMP_Text>();
         }
 
-        private void Start()
+        private void UpdatePrices()
         {
-            _productionManager = UnitProductionManager.Instance;
             _text.text = "Name: " + _productionManager.Units[index].name + "\nPrice: " +
                          _productionManager.Units[index].cost + "\nBuild time: " +
                          _productionManager.Units[index].timeToBuild;
+        }
+
+        private void Start()
+        {
+            _productionManager = UnitProductionManager.Instance;
+            UpdatePrices();
+        }
+
+        private void Update()
+        {
+            UpdatePrices();
         }
 
         public void OrderUnit()

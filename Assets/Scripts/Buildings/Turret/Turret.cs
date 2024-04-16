@@ -21,11 +21,11 @@ namespace Buildings.Turret
         
         private void Awake()
         {
-            MaxHealth = 7500f;
+            MaxHealth = 400f;
             CurrentHealth = MaxHealth;
 
-            _attackDamage = 100f;
-            _attackSpeed = 0.25f;
+            _attackDamage = 5f;
+            _attackSpeed = 0.5f;
             _attackRange = 5f;
 
             _searchingForTarget = true;
