@@ -19,6 +19,7 @@ public class UnitMovement : MonoBehaviour
     // TODO Move Gathering and Repairing to state machine
     // Gathering
     private bool _gathering;
+    private bool _gatherOnCooldown;
     private bool _returningResources;
     private int _resourceCount;
     private int _resourceLimit;
@@ -49,6 +50,7 @@ public class UnitMovement : MonoBehaviour
     private void Awake()
     {
         _gathering = false;
+        _gatherOnCooldown = false;
         _resourceLimit = 10;
 
         _repairing = false;
@@ -66,6 +68,7 @@ public class UnitMovement : MonoBehaviour
 
     IEnumerator Repair()
     {
+        yield return new WaitForFixedUpdate();
         while (_repairing)
         {
             yield return new WaitForSeconds(_repairSpeed);
@@ -86,6 +89,7 @@ public class UnitMovement : MonoBehaviour
     
     IEnumerator Gather()
     {
+        yield return new WaitForFixedUpdate();
         while (_gathering)
         {
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
@@ -117,19 +121,31 @@ public class UnitMovement : MonoBehaviour
             }
             else
             {
+                yield return new WaitForFixedUpdate();
                 if (agent.remainingDistance > 0.5f)
                 {
                     yield return new WaitForSeconds(0.1f);
                     continue;
                 }
-                _resourceCount += _resourceNode.Gather();
+                if (!_gatherOnCooldown) _resourceCount += _resourceNode.Gather();
+                _gatherOnCooldown = true;
+                agent.SetDestination(agent.transform.position);
                 resourceText.text = _resourceCount + " / " + _resourceLimit;
                 yield return new WaitForSeconds(1f);
-                agent.SetDestination(agent.transform.position);
+                _gatherOnCooldown = false;
             }
         }
 
         resourceText.text = "";
+    }
+
+    public bool IsWorking()
+    {
+        if (_repairing || _gathering)
+        {
+            return true;
+        }
+        return false;
     }
     
     private void Update()
@@ -157,6 +173,9 @@ public class UnitMovement : MonoBehaviour
             if (this.CompareTag("Worker") && Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
                 isCommandedToMove = true;
+                _gathering = false;
+                _repairing = false;
+                agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
                 if (hit.transform.CompareTag("ResourceNode") && !_gathering)
                 {
                     _resourceNode = hit.collider.GetComponent<IGatherable>();
@@ -166,16 +185,18 @@ public class UnitMovement : MonoBehaviour
                     _resourceType = _resourceNode.ResourceType;
                     _gathering = true;
                     _resourceLocation = hit.transform.position;
+                    StopAllCoroutines();
+                    resourceText.text = "";
                     StartCoroutine(Gather());
                 }
                 else if (hit.collider.GetComponent<IBuilding>() != null && !_repairing)
                 {
                     _building = hit.collider.GetComponent<IDamageable>();
                     _repairing = true;
+                    StopAllCoroutines();
+                    resourceText.text = "";
                     StartCoroutine(Repair());
                 }
-                
-                agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {

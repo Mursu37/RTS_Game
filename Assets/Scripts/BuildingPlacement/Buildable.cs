@@ -33,7 +33,8 @@ public class Buildable : MonoBehaviour
             {
                 if (collision.CompareTag("Worker"))
                 {
-                    _workerCount++;
+                    var worker = collision.GetComponent<UnitMovement>();
+                    if (!worker.IsWorking()) _workerCount++;
                 }
             }
 

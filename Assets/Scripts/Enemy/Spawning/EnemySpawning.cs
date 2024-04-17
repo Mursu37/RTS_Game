@@ -28,7 +28,7 @@ namespace Enemy.Spawning
         private void Awake()
         {
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
-            _untilNextWave = 60f;
+            _untilNextWave = 45f;
             _minSpawnDistance = 10;
             _waveValue = 10;
             _timeBetweenWaves = 45f;
@@ -108,7 +108,7 @@ namespace Enemy.Spawning
             {
                 _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
-                _waveValue = (int) (_waveValue * 1.25f);
+                _waveValue = (int) (_waveValue * 1.2f);
                 StartCoroutine(spawnEnemies());
             }
         }
