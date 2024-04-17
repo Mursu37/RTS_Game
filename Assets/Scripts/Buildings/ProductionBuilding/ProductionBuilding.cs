@@ -1,7 +1,9 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Projectiles;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine.AI;
 
 namespace Buildings.ProductionBuilding
@@ -21,6 +23,11 @@ namespace Buildings.ProductionBuilding
         private Camera _mainCamera;
         private Vector3 _rallyPoint;
         [SerializeField] private GameObject rallyPointVisual;
+
+        private bool _healing;
+        private float _healSpeed;
+        private float _healAmount;
+        [SerializeField] private GameObject healPrefab;
         
         private void Awake()
         {
@@ -30,6 +37,10 @@ namespace Buildings.ProductionBuilding
             _mainCamera = Camera.main;
             
             rallyPointVisual.SetActive(false);
+
+            _healing = true;
+            _healSpeed = 1f / 2f;
+            _healAmount = 1f;
         }
         
         protected override void Start()
@@ -38,6 +49,7 @@ namespace Buildings.ProductionBuilding
             _productionManager = UnitProductionManager.Instance;
             panel = PanelManager.Instance.unitProductionPanel;
             _buildingQuePanel = PanelManager.Instance.buildingQue;
+            StartCoroutine(HealAroundBuilding());
         }
 
         public override void BuildingSelected()
@@ -103,6 +115,57 @@ namespace Buildings.ProductionBuilding
             {
                 int amountMore = _buildingQue.Count - 3;
                 _buildingQueText.text += "\n" + amountMore + " more units";
+            }
+        }
+
+        IEnumerator HealAroundBuilding()
+        {
+            Unit target = null;
+            Collider targetCollider = null;
+            while (_healing)
+            {
+                yield return new WaitForSeconds(_healSpeed);
+
+                // check that target is not null, is close enough and is not full health
+                // if condition is filled keep healing same unit until full health
+                if (target != null &&
+                    (targetCollider.transform.position - transform.position).magnitude < 2.5f &&
+                    target.CurrentHealth < target.MaxHealth)
+                {
+                    var heal = Instantiate(healPrefab, transform.position, Quaternion.identity).GetComponent<Healing>();
+                    heal.target = targetCollider;
+                    heal.healAmount = _healAmount;
+                    yield return new WaitForFixedUpdate();
+                    continue;
+                }
+                
+                // find units
+                Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(2f, 2f, 2f),
+                    Quaternion.identity,
+                    ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
+
+                // if previous condition was not met look for new units and take one
+                target = null;
+                foreach (var collider in colliders)
+                {
+                    var unit = collider.GetComponent<Unit>();
+                    if (unit != null)
+                    {
+                        if ((unit.CurrentHealth / unit.MaxHealth) >= 1f) continue;
+                        target = unit;
+                        targetCollider = collider;
+                        break;
+                    }
+                }
+
+                // if a target is found heal
+                if (target != null)
+                {
+                    var heal = Instantiate(healPrefab, transform.position, Quaternion.identity).GetComponent<Healing>();
+                    heal.target = targetCollider;
+                    heal.healAmount = _healAmount;
+                }
+                yield return new WaitForFixedUpdate();
             }
         }
 

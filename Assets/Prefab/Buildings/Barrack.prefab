@@ -254,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 7488120766324135591}
   rallyPointVisual: {fileID: 6001282092201108294}
+  healPrefab: {fileID: 4704355212457624865, guid: 8c592a70fe34af84c8d2e2d9dc421e48, type: 3}
 --- !u!1 &7488120766324135591
 GameObject:
   m_ObjectHideFlags: 0
