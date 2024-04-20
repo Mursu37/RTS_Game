@@ -14,7 +14,8 @@ public class Infantry : Unit
     void Start()
     {
         damage = 6f;
-        attackRange = 4f;
+        attackRange = 3f;
+        stopAttackDistance = 3.2f; // t‰m‰n pit‰‰ olla v‰h‰n isompi kuin attack range
         attackSpeed = 2f;
         movementSpeed = 3f;
         attackCooldown = 1f / attackSpeed;
@@ -22,6 +23,7 @@ public class Infantry : Unit
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
         SetupNavMeshAgent();
+        
 
 
     }

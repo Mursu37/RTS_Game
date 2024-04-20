@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -12,8 +14,11 @@ public class Unit : MonoBehaviour, IDamageable
     public float attackRange = 1f;
     public float attackSpeed = 1f; // attacks per second
     public float movementSpeed = 2f;
+    public float stopAttackDistance = 1.2f; // t‰m‰n pit‰‰ olla v‰h‰n isompi kuin attack range
 
     public float attackCooldown;
+
+    public HealthTracker healthTracker;
 
     protected NavMeshAgent agent;
 
@@ -22,10 +27,13 @@ public class Unit : MonoBehaviour, IDamageable
         movementSpeed = 5f;
         attackCooldown = 1f / attackSpeed;
         CurrentHealth = MaxHealth;
+        UpdateHealthUI();
         agent = GetComponent<NavMeshAgent>();
         SetupNavMeshAgent();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
     }
+
+   
 
     private void OnDestroy()
     {
@@ -40,26 +48,24 @@ public class Unit : MonoBehaviour, IDamageable
         agent.acceleration = 99999;
         agent.angularSpeed = 200;
         agent.speed = movementSpeed;
-        agent.stoppingDistance = 0.5f;
+        agent.stoppingDistance = 2.5f;
     }
 
 
-    //public virtual void TakeDamage(float amount)
-    //{
-    //    healthPoints -= amount;
-    //    if (healthPoints <= 0)
-    //    {
-    //        Destroy(gameObject); 
-    //    }
-    //}
+  
     
     public void Damage(float amount)
     {
         CurrentHealth -= amount;
+        UpdateHealthUI();
         if (CurrentHealth <= 0)
         {
             Die();
         }
+    }
+    private void UpdateHealthUI()
+    {
+        healthTracker.UpdateSliderValue(CurrentHealth, MaxHealth);
     }
 
     public void Die()

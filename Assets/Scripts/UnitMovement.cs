@@ -114,6 +114,7 @@ public class UnitMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
+                agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
                 agent.SetDestination(hit.point - GetTargetDirection(hit.point));
                 if (_gathering)

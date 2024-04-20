@@ -12,13 +12,17 @@ public class UnitAttackState : StateMachineBehaviour
     Unit unit;
     private float _timer = 0;
 
-    public float stopAttackingDistance = 1.2f; // HUOM TÄMÄN PITÄÄ OLLA ISOMPI KUIN float attackingDistance UnitFollowState.cs
+    public float stopAttackingDistance;
+    
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
         attackController = animator.GetComponent<AttackController>();
         attackController.SetAttackMaterial();
         unit = animator.GetComponent<Unit>();
+        stopAttackingDistance = unit.stopAttackDistance;
+
+        agent.stoppingDistance = unit.attackRange * 0.9f; // nav mesh stop distance tätä pitää säätää vielä, ehkä toteutetaan muulla tavalla.
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,6 +40,7 @@ public class UnitAttackState : StateMachineBehaviour
             // actually perform attack
             if (_timer >= unit.attackCooldown)
             {
+
                 float damage = unit.damage;
                 var dam = attackController.targetToAttack.GetComponent<IDamageable>();
                 if (dam != null)
@@ -77,6 +82,6 @@ public class UnitAttackState : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        agent.stoppingDistance = 0.5f;
     }
 }
