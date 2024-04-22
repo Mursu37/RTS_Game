@@ -161,6 +161,7 @@ public class UnitMovement : MonoBehaviour
             if (_resourceNode == null)
             {
                 _gathering = false;
+                StopCoroutine(Gather());
             }
         }
         
@@ -172,6 +173,7 @@ public class UnitMovement : MonoBehaviour
             
             if (this.CompareTag("Worker") && Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
+                agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
                 _gathering = false;
                 _repairing = false;

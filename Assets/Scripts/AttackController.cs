@@ -10,7 +10,13 @@ public class AttackController : MonoBehaviour
     public Material idleStateMaterial;
     public Material followStateMaterial;
     public Material attackStateMaterial;
-    public int unitDamage;
+    //   public int unitDamage; // turha atm
+    private Unit unit;
+
+    private void Start()
+    {
+        unit = GetComponent<Unit>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,16 +52,25 @@ public class AttackController : MonoBehaviour
     // attack/follow range detection gizmos
     private void OnDrawGizmos()
     {
-        //follow distance
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 10f * 0.2f); // followdistance unit spherecolliderin(follow/aggro range) radius * unitin skaala
+        if (unit == null)
+        {
+            unit = GetComponent<Unit>();
+            if (unit == null) return; // If still null, there's no Unit component attached, so exit
+        }
+        SphereCollider sphereCollider = GetComponent<SphereCollider>();
+        if (unit != null)
+        {
+            //follow distance
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, sphereCollider.radius * 0.2f); // followdistance unit spherecolliderin(follow/aggro range) radius * unitin skaala
 
-        //attack distance
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f); // attackingDistance
+            //attack distance
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, unit.attackRange); // attackingDistance
 
-        //stop attack distance
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 1.2f); // stopAttackingDistance
+            //stop attack distance
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, unit.stopAttackDistance);  // stopAttackingDistance
+        }
     }
 }
