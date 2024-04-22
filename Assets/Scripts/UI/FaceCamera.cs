@@ -11,6 +11,7 @@ public class FaceCamera : MonoBehaviour
     private void Start()
     {
         localTrans = GetComponent<Transform>();
+        facingCamera = Camera.main;
     }
 
     private void Update()

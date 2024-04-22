@@ -2814,6 +2814,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2502055932831647675, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: facingCamera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.498
@@ -2866,6 +2870,14 @@ PrefabInstance:
       propertyPath: facingCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8261633090259528423, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261633090259528423, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8946025008665705224, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
       propertyPath: m_Name
       value: Worker
