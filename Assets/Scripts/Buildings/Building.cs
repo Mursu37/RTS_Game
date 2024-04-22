@@ -10,6 +10,9 @@ namespace Buildings
 
         [SerializeField] protected GameObject indicator;
 
+        [SerializeField]
+        protected HealthTracker healthTracker;
+
         protected virtual void Start()
         {
             CurrentHealth = MaxHealth;
@@ -22,6 +25,7 @@ namespace Buildings
             {
                 Die();
             }
+            UpdateHealthUI();
         }
         
         public virtual void Heal(float amount)
@@ -31,6 +35,12 @@ namespace Buildings
             {
                 CurrentHealth = MaxHealth;
             }
+            UpdateHealthUI();
+        }
+        
+        protected virtual void UpdateHealthUI()
+        {
+            healthTracker.UpdateSliderValue(CurrentHealth, MaxHealth);
         }
 
         public virtual void Die()
