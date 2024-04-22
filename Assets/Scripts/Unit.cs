@@ -48,7 +48,7 @@ public class Unit : MonoBehaviour, IDamageable
         agent.acceleration = 99999;
         agent.angularSpeed = 200;
         agent.speed = movementSpeed;
-        agent.stoppingDistance = 2.5f;
+        agent.stoppingDistance = 0.5f;
     }
 
 
@@ -75,6 +75,7 @@ public class Unit : MonoBehaviour, IDamageable
         {
             CurrentHealth = MaxHealth;
         }
+        UpdateHealthUI();
     }
 
     public void Die()

@@ -36,6 +36,7 @@ public class UnitAttackState : StateMachineBehaviour
 
             // moving to enemy
             agent.SetDestination(attackController.targetToAttack.position);
+            agent.stoppingDistance = 2.7f;
             
             // actually perform attack
             if (_timer >= unit.attackCooldown)

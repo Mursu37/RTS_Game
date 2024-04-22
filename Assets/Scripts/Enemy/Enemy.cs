@@ -1,5 +1,6 @@
 
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ namespace Enemy
         public float CurrentHealth { get; set; }
         public NavMeshAgent agent;
         public float movementSpeed;
+        public HealthTracker healthTracker;
         public void Damage(float amount)
         {
             CurrentHealth -= amount;
@@ -18,6 +20,7 @@ namespace Enemy
             {
                 Die();
             }
+            UpdateHealthUI();
         }
         
         public void Heal(float amount)
@@ -35,6 +38,11 @@ namespace Enemy
             agent.angularSpeed = 200;
             agent.speed = movementSpeed;
             agent.stoppingDistance = 0.5f;
+        }
+        
+        protected virtual void UpdateHealthUI()
+        {
+            healthTracker.UpdateSliderValue(CurrentHealth, MaxHealth);
         }
         
         public void Die()
