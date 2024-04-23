@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
@@ -89,6 +90,7 @@ namespace Buildings.ProductionBuilding
             var newUnit = Instantiate(_buildingQue[0].unit, transform.position - new Vector3(0, 0, size.z + 0.5f), Quaternion.identity);
             if (_rallyPoint != Vector3.zero) newUnit.GetComponentInChildren<NavMeshAgent>().SetDestination(_rallyPoint);
             _buildingQue.RemoveAt(0);
+            _productionManager.UnitsInQue--;
             _currentBuildTimer = 0f;
             SetBuildingQueText();
         }
@@ -200,6 +202,11 @@ namespace Buildings.ProductionBuilding
                     CreateNewUnit();
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            if (this.enabled) _productionManager.UnitsInQue -= _buildingQue.Count;
         }
     }
 }

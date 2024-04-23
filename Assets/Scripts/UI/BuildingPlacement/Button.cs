@@ -25,7 +25,7 @@ namespace UI.BuildingPlacement
             _resourceManager = ResourceManager.Instance;
             _text.text = "Name: " + name + "\nPrice: " +
                          price + "\nBuild time: " +
-                         "10s";
+                         "5s";
         }
 
         public void SetBuilding()

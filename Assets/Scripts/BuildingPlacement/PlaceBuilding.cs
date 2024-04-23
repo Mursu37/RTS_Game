@@ -13,7 +13,7 @@ public class PlaceBuilding : MonoBehaviour
     public bool mouseOverUI = false;
     
     public GameObject turret;
-    public GameObject hq;
+    public GameObject supplyDepo;
     public GameObject barrack;
 
     public GameObject buildSite;
@@ -53,7 +53,7 @@ public class PlaceBuilding : MonoBehaviour
         _newBuilding.GetComponentInChildren<Collider>().enabled = true;
         // Look for objects at position not on Ground layer
         var collisions = Physics.OverlapBox(_newBuilding.transform.position,
-            _newBuilding.GetComponentInChildren<Collider>().bounds.extents + new Vector3(1, 1, 1), Quaternion.identity,
+            _newBuilding.GetComponentInChildren<Collider>().bounds.extents + new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity,
             ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
 
         // Spaghetti but i just couldnt figure out how to do this any smarter with the way units are made
@@ -120,6 +120,13 @@ public class PlaceBuilding : MonoBehaviour
             if (_resourceManager.CanAfford(100))
             {
                 set_building(turret, 100);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (_resourceManager.CanAfford(40))
+            {
+                set_building(supplyDepo, 40);
             }
         }
 
