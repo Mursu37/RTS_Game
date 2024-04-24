@@ -2334,7 +2334,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 963194228}
   followTransform: {fileID: 0}
   moveWithKeyboad: 1
-  moveWithEdgeScrolling: 1
+  moveWithEdgeScrolling: 0
   moveWithMouseDrag: 1
   fastSpeed: 0.2
   normalSpeed: 0.1
@@ -4460,7 +4460,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 101191e19e585fb4ba2bf07e000afeaf, type: 3}
---- !u!1001 &1577756056
+--- !u!1001 &1584457637
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6506,6 +6506,18 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.46
       objectReference: {fileID: 0}
@@ -6543,6 +6555,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741535760202757416, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4021649168653435584, guid: 19128673ee2278643b4766839eb75a3f, type: 3}
@@ -6596,8 +6612,8 @@ SceneRoots:
   - {fileID: 1980614040}
   - {fileID: 232061665}
   - {fileID: 1413070883}
-  - {fileID: 1577756056}
   - {fileID: 1235176169}
   - {fileID: 489293368}
   - {fileID: 922119220}
   - {fileID: 1762752638}
+  - {fileID: 1584457637}
