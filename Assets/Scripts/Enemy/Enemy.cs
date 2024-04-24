@@ -37,7 +37,7 @@ namespace Enemy
             agent.acceleration = 99999;
             agent.angularSpeed = 200;
             agent.speed = movementSpeed;
-            agent.stoppingDistance = 0.5f;
+            agent.stoppingDistance = 1f;
         }
         
         protected virtual void UpdateHealthUI()

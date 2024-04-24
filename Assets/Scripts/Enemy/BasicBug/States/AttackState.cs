@@ -12,6 +12,7 @@ namespace Enemy.BasicBug
 
         public override void OnEnter()
         {
+            Enemy.transform.LookAt(Enemy.target.transform);
             _attackTimer = Enemy.attackSpeed;
             Enemy.animator.SetTrigger("Attack");
         }
@@ -37,6 +38,8 @@ namespace Enemy.BasicBug
                 {
                     if (collider == Enemy.target)
                     {
+                        // TODO Make turning smooth
+                        Enemy.transform.LookAt(Enemy.target.transform);
                         var damageble = collider.GetComponent<IDamageable>();
                         damageble.Damage(Enemy.attackDamage);
                         _attackTimer = Enemy.attackSpeed;

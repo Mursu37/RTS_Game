@@ -98,7 +98,7 @@ public class RTSCameraController : MonoBehaviour
         // Keyboard Control
         if (moveWithKeyboad)
         {
-            if (Input.GetKey(KeyCode.LeftCommand))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
                 movementSpeed = fastSpeed;
             }
@@ -133,7 +133,7 @@ public class RTSCameraController : MonoBehaviour
             if (Input.mousePosition.x > Screen.width - edgeSize)
             {
                 newPosition += (transform.right * movementSpeed);
-                ChangeCursor(CursorArrow.RIGHT);
+                // ChangeCursor(CursorArrow.RIGHT);
                 isCursorSet = true;
             }
 
@@ -141,15 +141,15 @@ public class RTSCameraController : MonoBehaviour
             else if (Input.mousePosition.x < edgeSize)
             {
                 newPosition += (transform.right * -movementSpeed);
-                ChangeCursor(CursorArrow.LEFT);
+                // ChangeCursor(CursorArrow.LEFT);
                 isCursorSet = true;
             }
 
             // Move Up
-            else if (Input.mousePosition.y > Screen.height - edgeSize)
+            if (Input.mousePosition.y > Screen.height - edgeSize)
             {
                 newPosition += (transform.forward * movementSpeed);
-                ChangeCursor(CursorArrow.UP);
+                // ChangeCursor(CursorArrow.UP);
                 isCursorSet = true;
             }
 
@@ -157,7 +157,7 @@ public class RTSCameraController : MonoBehaviour
             else if (Input.mousePosition.y < edgeSize)
             {
                 newPosition += (transform.forward * -movementSpeed);
-                ChangeCursor(CursorArrow.DOWN);
+                // ChangeCursor(CursorArrow.DOWN);
                 isCursorSet = true;
             }
             else
