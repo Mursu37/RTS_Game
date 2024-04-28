@@ -9,8 +9,9 @@ public class UnitFollowState : StateMachineBehaviour
     AttackController attackController;
 
     NavMeshAgent agent;
+    
 
-   // public float attackRange = 1f;
+    // public float attackRange = 1f;
 
     private Unit unit;
 
@@ -23,12 +24,13 @@ public class UnitFollowState : StateMachineBehaviour
         agent = animator.transform.GetComponent<NavMeshAgent>();
         unit = animator.transform.GetComponent<Unit>();
 
-        attackController.SetFollowMaterial();
+        //attackController.SetFollowMaterial();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         // should unit transition to idle state?
         if (attackController.targetToAttack == null)
         {

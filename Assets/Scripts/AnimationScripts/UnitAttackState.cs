@@ -18,7 +18,7 @@ public class UnitAttackState : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         attackController = animator.GetComponent<AttackController>();
-        attackController.SetAttackMaterial();
+        //attackController.SetAttackMaterial();
         unit = animator.GetComponent<Unit>();
         stopAttackingDistance = unit.stopAttackDistance;
 

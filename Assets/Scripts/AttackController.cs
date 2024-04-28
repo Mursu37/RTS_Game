@@ -36,18 +36,18 @@ public class AttackController : MonoBehaviour
 
 
     // just for debugging
-    public void SetIdleMaterial()
-    {
-        GetComponent<Renderer>().material = idleStateMaterial;
-    }
-    public void SetFollowMaterial()
-    {
-        GetComponent<Renderer>().material = followStateMaterial;
-    }
-    public void SetAttackMaterial()
-    {
-        GetComponent<Renderer>().material = attackStateMaterial;
-    }
+    //public void SetIdleMaterial()
+    //{
+    //    GetComponent<Renderer>().material = idleStateMaterial;
+    //}
+    //public void SetFollowMaterial()
+    //{
+    //    GetComponent<Renderer>().material = followStateMaterial;
+    //}
+    //public void SetAttackMaterial()
+    //{
+    //    GetComponent<Renderer>().material = attackStateMaterial;
+    //}
 
     // attack/follow range detection gizmos
     private void OnDrawGizmos()

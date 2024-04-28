@@ -6,12 +6,14 @@ public class UnitIdleState : StateMachineBehaviour
 {
 
     AttackController attackController;
+    UnitMovement unitMovement;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         attackController = animator.transform.GetComponent<AttackController>();
+        unitMovement = animator.transform.GetComponent<UnitMovement>();
 
-        attackController.SetIdleMaterial();
+        //attackController.SetIdleMaterial();
 
         var colliders = Physics.OverlapSphere(animator.transform.position, 10 * 0.2f, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
         if (colliders.Length > 0)
@@ -24,8 +26,12 @@ public class UnitIdleState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            // target check
-        if(attackController.targetToAttack != null) 
+        if (unitMovement.isCommandedToMove == true)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        // target check
+        if (attackController.targetToAttack != null) 
         {
             // transition to follow state
             animator.SetBool("isFollowing", true);
