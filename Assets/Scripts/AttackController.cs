@@ -62,7 +62,7 @@ public class AttackController : MonoBehaviour
         {
             //follow distance
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, sphereCollider.radius * 0.2f); // followdistance unit spherecolliderin(follow/aggro range) radius * unitin skaala
+            Gizmos.DrawWireSphere(transform.position, sphereCollider.radius /** 0.2f*/); // followdistance unit spherecolliderin(follow/aggro range) radius * unitin skaala
 
             //attack distance
             Gizmos.color = Color.red;
