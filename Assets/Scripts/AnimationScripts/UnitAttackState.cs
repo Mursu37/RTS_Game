@@ -28,8 +28,13 @@ public class UnitAttackState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
+        if (animator.transform.GetComponent<UnitMovement>().isCommandedToMove == true)
+        {
+            animator.SetBool("isAttacking", false);
+        }
         // check if we have target and if we didnt give another move command
-        if(attackController.targetToAttack != null && animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
+        if (attackController.targetToAttack != null && animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
         {
             _timer += Time.deltaTime;
             // voi olla buginen myöhemmmin animaatioiden kanssa
@@ -37,7 +42,7 @@ public class UnitAttackState : StateMachineBehaviour
 
             // moving to enemy
             agent.SetDestination(attackController.targetToAttack.position);
-            agent.stoppingDistance = 2.7f;
+            agent.stoppingDistance = unit.attackRange - 0.2f;
             
             // actually perform attack
             if (_timer >= unit.attackCooldown)
