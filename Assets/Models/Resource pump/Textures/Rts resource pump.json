@@ -1,0 +1,75 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 16
+                },
+                "Parallax Occlusion Mapping": {
+                    "maxPOMSamples": 16,
+                    "minPOMSamples": 4,
+                    "pomStrength": 1,
+                    "usePOM": false
+                }
+            },
+            "shader": "pbr-metal-rough-with-alpha-blending",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "Building": {
+            "shader": "Main shader"
+        },
+        "Doorway": {
+            "shader": "Main shader"
+        },
+        "Drill": {
+            "shader": "Main shader"
+        },
+        "Greebles": {
+            "shader": "Main shader"
+        },
+        "Grip": {
+            "shader": "Main shader"
+        },
+        "Lights": {
+            "shader": "Main shader"
+        },
+        "Metalbits": {
+            "shader": "Main shader"
+        },
+        "Piston1": {
+            "shader": "Main shader"
+        },
+        "Pit1": {
+            "shader": "Main shader"
+        },
+        "Rims1": {
+            "shader": "Main shader"
+        },
+        "Ring": {
+            "shader": "Main shader"
+        },
+        "Roof": {
+            "shader": "Main shader"
+        },
+        "Silos": {
+            "shader": "Main shader"
+        },
+        "concrete": {
+            "shader": "Main shader"
+        },
+        "exhausts": {
+            "shader": "Main shader"
+        },
+        "pillars": {
+            "shader": "Main shader"
+        }
+    }
+}
