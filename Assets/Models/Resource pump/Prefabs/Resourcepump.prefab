@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4187440725873646999}
@@ -40,6 +40,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6851420171469754060}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c1a3eb376204842558936687628841a7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1a3eb376204842558936687628841a7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1a3eb376204842558936687628841a7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1a3eb376204842558936687628841a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -169,6 +181,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c1a3eb376204842558936687628841a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6700589615452081154}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c1a3eb376204842558936687628841a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5697928369963100055}
   m_SourcePrefab: {fileID: 100100000, guid: c1a3eb376204842558936687628841a7, type: 3}
 --- !u!1 &3555336320576620333 stripped
 GameObject:
@@ -227,8 +242,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2633.7214, y: 3594.9414, z: 4015.846}
+  m_Center: {x: 57.568428, y: 4.742622, z: -57.977673}
+--- !u!208 &5697928369963100055
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555336320576620333}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 990.12067, y: 1351.4816, z: 1509.7166}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &4187440725873646999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c1a3eb376204842558936687628841a7, type: 3}
