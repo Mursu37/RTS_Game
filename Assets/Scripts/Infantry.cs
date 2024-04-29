@@ -50,6 +50,7 @@ public class Infantry : Unit
             UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
         }
     }
+    
 
    
 }
