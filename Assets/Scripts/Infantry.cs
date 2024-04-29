@@ -36,6 +36,7 @@ public class Infantry : Unit
             UnitSelectionManager.Instance.unitsSelected.Remove(gameObject);
         }
     }
+    
 
     //// Override the TakeDamage method if the infantry has unique behavior when taking damage
     //// esim armor yms 

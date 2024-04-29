@@ -2334,7 +2334,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 963194228}
   followTransform: {fileID: 0}
   moveWithKeyboad: 1
-  moveWithEdgeScrolling: 0
+  moveWithEdgeScrolling: 1
   moveWithMouseDrag: 1
   fastSpeed: 0.2
   normalSpeed: 0.1
@@ -5626,7 +5626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce8c174384b4cc0842edfe3665fe431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceNodePrefab: {fileID: 7388423062011329725, guid: 098b2cd7039031544a954fc5750bb05f, type: 3}
+  _resourceNodePrefab: {fileID: 3854682458167385937, guid: 6a82e9a0b85fd453aa8e9eb477144ff1, type: 3}
 --- !u!4 &1939165994
 Transform:
   m_ObjectHideFlags: 0
