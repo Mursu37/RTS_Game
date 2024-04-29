@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Infantry : Unit
 {
+    public Animator animator;
+    public float delay = 2f;
+    
     private void Awake()
     {
         MaxHealth = 100f;
@@ -27,7 +30,18 @@ public class Infantry : Unit
 
 
     }
-    
+
+    public override void Die()
+    {
+        animator.SetTrigger("Die");
+        GetComponent<Collider>().enabled = false;
+        Destroy(gameObject, delay);
+        
+    }
+
+
+
+
     private void OnDestroy()
     {
         UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
@@ -37,11 +51,5 @@ public class Infantry : Unit
         }
     }
 
-    //// Override the TakeDamage method if the infantry has unique behavior when taking damage
-    //// esim armor yms 
-    //public override void TakeDamage(float amount)
-    //{
-
-    //    base.TakeDamage(amount);
-    //}
+   
 }

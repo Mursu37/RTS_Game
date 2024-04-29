@@ -21,6 +21,7 @@ public class Unit : MonoBehaviour, IDamageable
     public HealthTracker healthTracker;
 
     protected NavMeshAgent agent;
+    
 
     void Start()
     {
@@ -78,7 +79,7 @@ public class Unit : MonoBehaviour, IDamageable
         UpdateHealthUI();
     }
 
-    public void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }

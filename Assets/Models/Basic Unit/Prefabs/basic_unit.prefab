@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd5326f40728e4b9589d16d0cf61ecf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62
+      value: -9.63
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd5326f40728e4b9589d16d0cf61ecf3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd5326f40728e4b9589d16d0cf61ecf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.99
+      value: 19.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd5326f40728e4b9589d16d0cf61ecf3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -431,6 +431,8 @@ MonoBehaviour:
   stopAttackDistance: 1.2
   attackCooldown: 0
   healthTracker: {fileID: 3450474353141163605}
+  animator: {fileID: -7491899518406363}
+  delay: 1
 --- !u!195 &1006872336250316167
 NavMeshAgent:
   m_ObjectHideFlags: 0
