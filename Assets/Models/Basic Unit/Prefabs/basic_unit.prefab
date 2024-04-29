@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1385308785196308615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308230395248331407}
+  m_Layer: 7
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1308230395248331407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385308785196308615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -49.4, z: 3.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3937631044328961410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4073077942382008609
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +462,9 @@ MonoBehaviour:
   stopAttackDistance: 1.2
   attackCooldown: 0
   healthTracker: {fileID: 3450474353141163605}
+  bullet: {fileID: 0}
+  barrel: {fileID: 1385308785196308615}
+  spawnPoint: {x: 0, y: 0, z: 0}
   animator: {fileID: -7491899518406363}
   delay: 1
 --- !u!195 &1006872336250316167
@@ -681,7 +715,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ec4fedd0ebdb40f3b76a23d8725f19d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1308230395248331407}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec4fedd0ebdb40f3b76a23d8725f19d, type: 3}
 --- !u!4 &3937631044328961410 stripped

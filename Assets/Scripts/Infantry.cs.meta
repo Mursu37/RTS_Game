@@ -3,7 +3,10 @@ guid: 7be5136f74080ec4d8302709400153e3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthTracker: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - bullet: {fileID: 6668713121696459873, guid: 164f2aa028c950c4cb6a926b528071f4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

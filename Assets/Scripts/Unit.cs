@@ -19,6 +19,9 @@ public class Unit : MonoBehaviour, IDamageable
     public float attackCooldown;
 
     public HealthTracker healthTracker;
+    
+    public GameObject bullet;
+    public GameObject barrel;
 
     protected NavMeshAgent agent;
     

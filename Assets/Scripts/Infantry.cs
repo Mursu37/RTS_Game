@@ -16,10 +16,10 @@ public class Infantry : Unit
     
     void Start()
     {
-        damage = 30f;
-        attackRange = 3f;
-        stopAttackDistance = 3.2f; // t‰m‰n pit‰‰ olla v‰h‰n isompi kuin attack range
-        attackSpeed = 0.5f;
+        damage = 1f;
+        attackRange = 5f;
+        stopAttackDistance = attackRange + 0.2f; // t‰m‰n pit‰‰ olla v‰h‰n isompi kuin attack range
+        attackSpeed = 3f;
         movementSpeed = 3f;
         attackCooldown = 1f / attackSpeed;
         CurrentHealth = MaxHealth;

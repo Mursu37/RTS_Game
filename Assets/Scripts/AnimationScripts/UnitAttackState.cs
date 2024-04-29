@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Projectiles;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -43,6 +44,8 @@ public class UnitAttackState : StateMachineBehaviour
             {
 
                 float damage = unit.damage;
+                var bullet = Instantiate(unit.bullet, unit.barrel.transform.position, Quaternion.Euler(0, 0, 0));
+                bullet.GetComponentInChildren<UnitBullet>().target = attackController.targetToAttack.GetComponent<Collider>();
                 var dam = attackController.targetToAttack.GetComponent<IDamageable>();
                 if (dam != null)
                 {
