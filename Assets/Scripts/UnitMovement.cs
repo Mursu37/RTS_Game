@@ -44,8 +44,34 @@ public class UnitMovement : MonoBehaviour
     /// <returns></returns>
     private Vector3 GetTargetDirection(Vector3 targetPosition)
     {
-        return (targetPosition - transform.position).normalized * 0.1f;
+        return (targetPosition - transform.position).normalized * 1f;
     }
+    
+    private Vector3 GetClosestDepositionLocation()
+    {
+        Vector3 closestPosition = _hq;
+        float closestPositionDistance;
+
+
+        GameObject[] supplyDepos = GameObject.FindGameObjectsWithTag("SupplyDepo");
+        if (supplyDepos.Length == 0) return closestPosition;
+
+
+        closestPositionDistance = (_hq - transform.position).magnitude;
+        foreach (var depo in supplyDepos)
+        {
+            float depoDistance = (depo.transform.position - transform.position).magnitude;
+            if (depoDistance < closestPositionDistance)
+            {
+                closestPosition = depo.transform.position;
+                closestPositionDistance = depoDistance;
+            }
+        }
+
+
+        return closestPosition;
+    }
+
 
     private void Awake()
     {
@@ -94,7 +120,8 @@ public class UnitMovement : MonoBehaviour
         {
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
-                agent.SetDestination(_hq - GetTargetDirection(_hq));
+                Vector3 depositionLocation = GetClosestDepositionLocation();
+                agent.SetDestination(depositionLocation - GetTargetDirection(depositionLocation));
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();
                 

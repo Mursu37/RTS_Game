@@ -102,6 +102,7 @@ public class PlaceBuilding : MonoBehaviour
         _newBuilding.GetComponentInChildren<Collider>().enabled = false;
         _newBuilding.GetComponentInChildren<NavMeshObstacle>().enabled = false;
         _newBuilding.GetComponentInChildren<Buildings.Building>().enabled = false;
+        _newBuilding.GetComponentInChildren<Collider>().tag = "Untagged";
         _beingPlaced = building;
         _placingBuilding = true;
     }

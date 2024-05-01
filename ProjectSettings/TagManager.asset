@@ -16,6 +16,7 @@ TagManager:
   - ResourceSpawnLocation
   - CloseResourceSpawnLocation
   - Buildable
+  - SupplyDepo
   layers:
   - Default
   - TransparentFX
