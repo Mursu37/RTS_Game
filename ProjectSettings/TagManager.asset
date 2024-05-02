@@ -17,6 +17,7 @@ TagManager:
   - CloseResourceSpawnLocation
   - Buildable
   - SupplyDepo
+  - HiveSpawn
   layers:
   - Default
   - TransparentFX

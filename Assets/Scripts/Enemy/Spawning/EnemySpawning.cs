@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,13 +26,41 @@ namespace Enemy.Spawning
 
         private float _timeBetweenSpawns;
 
+        [SerializeField] private GameObject hive;
+        private List<GameObject> _spawnLocations = new List<GameObject>();
+        
         private void Awake()
         {
+            CreateHives(1);
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             _untilNextWave = 45f;
             _minSpawnDistance = 10;
             _waveValue = 10;
             _timeBetweenWaves = 45f;
+        }
+
+        private void CreateHives(int amount)
+        {
+            GameObject[] temp = GameObject.FindGameObjectsWithTag("HiveSpawn");
+            List<GameObject> possibleHiveLocations = temp.ToList();
+            
+            // spawn Hives
+            for (int i = 0; i < amount; i++)
+            {
+                int index = Random.Range(0, possibleHiveLocations.Count);
+                var newHive = Instantiate(hive,
+                    possibleHiveLocations[index].transform.position,
+                    Quaternion.identity);
+                possibleHiveLocations.RemoveAt(index);
+                _spawnLocations.Add(newHive);
+            }
+
+            // Destroy Hive spawn locations
+            foreach (var hives in possibleHiveLocations)
+            {
+                Destroy(hives);
+            }
+            
         }
 
         private void GenerateWave(int value)
