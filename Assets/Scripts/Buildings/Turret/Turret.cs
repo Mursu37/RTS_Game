@@ -12,6 +12,8 @@ namespace Buildings.Turret
 
         private bool _searchingForTarget;
         private bool _turretOn;
+
+        Animator _animator;
         
         [SerializeField] private GameObject _bullet;
         
@@ -26,6 +28,7 @@ namespace Buildings.Turret
 
             _searchingForTarget = true;
             _turretOn = true;
+            _animator = GetComponent<Animator>();
         }
 
         protected override void Start()
@@ -45,8 +48,10 @@ namespace Buildings.Turret
 
         IEnumerator Search()
         {
+            _animator.SetBool("isAttacking", false);
             while (_searchingForTarget)
             {
+
                 yield return new WaitForSeconds(0.25f);
                 Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRange - 1,
                     LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
@@ -61,6 +66,8 @@ namespace Buildings.Turret
 
         IEnumerator Attack()
         {
+
+            _animator.SetBool("isAttacking", true);
             IDamageable damageable = _target.GetComponent<IDamageable>();
             if (damageable == null)
             {

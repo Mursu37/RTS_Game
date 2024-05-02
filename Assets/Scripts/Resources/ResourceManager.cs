@@ -15,7 +15,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
-        _resourceStorage.Add(Resource.Titanium, 50);
+        _resourceStorage.Add(Resource.Titanium, 5000);
 
         if (Instance != null && Instance != this)
         {
