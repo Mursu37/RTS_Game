@@ -86,14 +86,17 @@ namespace Enemy.Spawning
             _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 2;
         }
 
+        
         private Vector3 GetSpawnPosition()
         {
+            return _spawnLocations[Random.Range(0, _spawnLocations.Count)].transform.position;
+            /*
             float xPosition = Random.Range(-20, 35);
             float zPosition = Random.Range(-20, 40);
-            
+
             // if elevation is added to the map y check needs to be reworked
             float yPosition = _hqLocation.y;
-            
+
             if (!Physics.Raycast(new Vector3(xPosition, 100, zPosition), Vector3.down,
                     1000f, LayerMask.GetMask("Obstacle"), QueryTriggerInteraction.Collide))
             {
@@ -116,6 +119,7 @@ namespace Enemy.Spawning
                 }
             }
             return GetSpawnPosition();
+            */
         }
 
         IEnumerator spawnEnemies()
