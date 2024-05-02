@@ -84,7 +84,8 @@ public class PlaceBuilding : MonoBehaviour
         var buildable = building.GetComponentInChildren<Buildable>();
         buildable.TimeToBuild = 5f;
         buildable.Building = _beingPlaced;
-        building.transform.GetChild(0).transform.localScale = _newBuilding.transform.GetChild(0).transform.localScale;
+        building.transform.GetChild(0).transform.localScale =
+            _newBuilding.GetComponentInChildren<Collider>().bounds.extents * 1.25f; // transform.GetChild(0).transform.localScale;
         building.transform.GetChild(0).transform.position = _newBuilding.transform.GetChild(0).transform.position;
         Destroy(_newBuilding);
         _placingBuilding = false;   
@@ -99,7 +100,9 @@ public class PlaceBuilding : MonoBehaviour
 
         _price = price;
         _newBuilding = Instantiate(building, new Vector3(0, 0, 0), Quaternion.identity);
-        _newBuilding.GetComponentInChildren<Collider>().enabled = false;
+        var collider = _newBuilding.GetComponentInChildren<Collider>();
+        if (collider == null) _newBuilding.GetComponent<Collider>();
+        collider.enabled = false;
         _newBuilding.GetComponentInChildren<NavMeshObstacle>().enabled = false;
         _newBuilding.GetComponentInChildren<Buildings.Building>().enabled = false;
         _newBuilding.GetComponentInChildren<Collider>().tag = "Untagged";

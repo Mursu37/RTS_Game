@@ -73,13 +73,7 @@ public class UnitAttackState : StateMachineBehaviour
         }
         if (attackController.targetToAttack == null)
         {
-            
-           
                 animator.SetBool("isAttacking", false); // move back to follow state 
-         
-
-
-                
         }
 
     }
