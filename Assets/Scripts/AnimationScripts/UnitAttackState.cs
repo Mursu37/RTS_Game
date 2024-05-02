@@ -65,7 +65,7 @@ public class UnitAttackState : StateMachineBehaviour
 
             if (distanceFromTarget > stopAttackingDistance || attackController.targetToAttack == null)
             {
-                
+
                 animator.SetBool("isAttacking", false); // move back to follow state
             }
 
@@ -73,8 +73,13 @@ public class UnitAttackState : StateMachineBehaviour
         }
         if (attackController.targetToAttack == null)
         {
+            
+           
+                animator.SetBool("isAttacking", false); // move back to follow state 
+         
 
-            animator.SetBool("isAttacking", false); // move back to follow state
+
+                
         }
 
     }

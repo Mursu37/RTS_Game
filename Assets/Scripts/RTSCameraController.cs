@@ -83,7 +83,7 @@ public class RTSCameraController : MonoBehaviour
         if (Input.mouseScrollDelta != Vector2.zero)
         {
             float cameraSize = _camera.fieldOfView + Input.mouseScrollDelta.y * -0.5f;
-            if (cameraSize is <= 20 and >= 10)
+            if (cameraSize is <= 30 and >= 10)
             {
                 _camera.fieldOfView = cameraSize;
             }

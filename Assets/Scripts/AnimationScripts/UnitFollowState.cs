@@ -35,7 +35,16 @@ public class UnitFollowState : StateMachineBehaviour
         // should unit transition to idle state?
         if (attackController.targetToAttack == null)
         {
-            animator.SetBool("isFollowing", false);
+            var colliders = Physics.OverlapSphere(animator.transform.position, 8, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
+            if (colliders.Length > 0)
+            {
+                attackController.targetToAttack = colliders[0].transform;
+
+            }
+            else
+            {
+                animator.SetBool("isFollowing", false);
+            }
         } else
         {
             // if there is no other direct command to move
