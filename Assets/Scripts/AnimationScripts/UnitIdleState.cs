@@ -7,6 +7,7 @@ public class UnitIdleState : StateMachineBehaviour
 
     AttackController attackController;
     UnitMovement unitMovement;
+    Unit unit;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -15,7 +16,7 @@ public class UnitIdleState : StateMachineBehaviour
 
         //attackController.SetIdleMaterial();
 
-        var colliders = Physics.OverlapSphere(animator.transform.position, 10 * 0.2f, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
+        var colliders = Physics.OverlapSphere(animator.transform.position, 8 , LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
         if (colliders.Length > 0)
         {
             attackController.targetToAttack = colliders[0].transform;
