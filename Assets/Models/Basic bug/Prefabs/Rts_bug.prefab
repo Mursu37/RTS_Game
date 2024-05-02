@@ -162,6 +162,37 @@ Transform:
   - {fileID: 136149575688964001}
   m_Father: {fileID: 631461339298464249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1494034800264307822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6690308474021619937}
+  m_Layer: 8
+  m_Name: bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6690308474021619937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494034800264307822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6214945368650526436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1623540273084480133
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +886,7 @@ Transform:
   - {fileID: 8275236468799699264}
   - {fileID: 527073678315649584}
   - {fileID: 598246961396788805}
+  - {fileID: 6690308474021619937}
   m_Father: {fileID: 2715050815499037556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5985297509279752236
@@ -939,9 +971,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f579f3c158f4443eb4b89243cf3b677c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSplatter: {fileID: 6353553835652905166, guid: bd5073a9df55eab429c23dd5650e55b0, type: 3}
   agent: {fileID: 0}
   movementSpeed: 0
   healthTracker: {fileID: 2100814022330711520}
+  bottom: {fileID: 1494034800264307822}
   target: {fileID: 0}
   aggroRange: 0
   attackRange: 0

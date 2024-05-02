@@ -6,13 +6,17 @@ using UnityEngine.AI;
 
 namespace Enemy
 {
-    public abstract class Enemy : MonoBehaviour, IDamageable 
+    public abstract class Enemy : MonoBehaviour, IDamageable
     {
+        [SerializeField] private GameObject
+        deathSplatter;
         public float MaxHealth { get; set; }
         public float CurrentHealth { get; set; }
         public NavMeshAgent agent;
         public float movementSpeed;
         public HealthTracker healthTracker;
+
+        [SerializeField] private GameObject bottom;
         public void Damage(float amount)
         {
             CurrentHealth -= amount;
@@ -47,6 +51,7 @@ namespace Enemy
         
         public void Die()
         {
+            Instantiate(deathSplatter, bottom.transform.position, Quaternion.identity);
             Destroy(transform.parent.gameObject);
         }
 
