@@ -141,7 +141,7 @@ namespace Enemy.Spawning
             {
                 _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
-                _waveValue = (int) (_waveValue * 1.2f);
+                _waveValue = (int) (_waveValue * 1.2f); // 1.2f default
                 StartCoroutine(spawnEnemies());
             }
         }

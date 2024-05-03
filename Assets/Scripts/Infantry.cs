@@ -16,11 +16,11 @@ public class Infantry : Unit
     
     void Start()
     {
-        damage = 10f; // 10
+        damage = 0.1f; // 10
         attackRange = 5f;
         stopAttackDistance = attackRange + 0.2f; // t‰m‰n pit‰‰ olla v‰h‰n isompi kuin attack range
         attackSpeed = 3f; //3
-        movementSpeed = 15f; //3
+        movementSpeed = 3f; //3
         attackCooldown = 1f / attackSpeed;
         CurrentHealth = MaxHealth;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
