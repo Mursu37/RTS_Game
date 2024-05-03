@@ -31,7 +31,7 @@ namespace Enemy.Spawning
         
         private void Awake()
         {
-            CreateHives(1);
+            CreateHives(3);
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             _untilNextWave = 45f;
             _minSpawnDistance = 10;

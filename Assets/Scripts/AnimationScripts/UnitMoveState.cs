@@ -2,26 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitMoveState : StateMachineBehaviour
 {
     
 
     UnitMovement unitMovement;
+    private NavMeshAgent agent;
     
+
     // right click movement animaatiota varten
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
+        agent = animator.transform.GetComponent<NavMeshAgent>();
         unitMovement = animator.transform.GetComponent<UnitMovement>();
         if (unitMovement == null)
         {
             Debug.LogError("UnitMovement component not found on the animator's GameObject");
         }
+        if (agent == null)
+        {
+            Debug.LogError("NavMeshAgent component not found on the animator's GameObject");
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (agent == null) return;
+
+        if (agent != null && (agent.remainingDistance <= agent.stoppingDistance && !agent.hasPath))
+        {
+            animator.SetBool("isMoving", false);
+        }
+
 
         if (unitMovement != null && !unitMovement.isCommandedToMove)
         {

@@ -12,7 +12,9 @@ public class UnitMovement : MonoBehaviour
 {
     Camera cam;
     NavMeshAgent agent;
+    private Animator animator;
     public LayerMask ground;
+
 
     public bool isCommandedToMove;
 
@@ -90,6 +92,7 @@ public class UnitMovement : MonoBehaviour
     {
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     IEnumerator Repair()
@@ -231,7 +234,9 @@ public class UnitMovement : MonoBehaviour
             {
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
+               
                 agent.SetDestination(hit.point - GetTargetDirection(hit.point));
+               
                 
                 _gathering = false;
                 _repairing = false;

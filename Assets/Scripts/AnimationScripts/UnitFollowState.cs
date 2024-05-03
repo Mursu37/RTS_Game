@@ -7,14 +7,10 @@ using UnityEngine.AI;
 public class UnitFollowState : StateMachineBehaviour
 {
     AttackController attackController;
-
     NavMeshAgent agent;
-    
-    
-
-    // public float attackRange = 1f;
-
     private Unit unit;
+   
+
 
 
 
@@ -24,6 +20,7 @@ public class UnitFollowState : StateMachineBehaviour
         attackController = animator.transform.GetComponent<AttackController>();
         agent = animator.transform.GetComponent<NavMeshAgent>();
         unit = animator.transform.GetComponent<Unit>();
+       
 
         //attackController.SetFollowMaterial();
     }
@@ -31,7 +28,8 @@ public class UnitFollowState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+       
+
         // should unit transition to idle state?
         if (attackController.targetToAttack == null)
         {
