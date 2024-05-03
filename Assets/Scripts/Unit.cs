@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour, IDamageable
 
     void Start()
     {
-        movementSpeed = 5f;
+        movementSpeed = 6.5f;
         attackCooldown = 1f / attackSpeed;
         CurrentHealth = MaxHealth;
         UpdateHealthUI();
