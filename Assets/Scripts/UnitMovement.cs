@@ -241,7 +241,10 @@ public class UnitMovement : MonoBehaviour
             {
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
-                Debug.Log(hit.point);
+                
+                //fix for infantry movement without having to rewrite unit selection script
+                FixMovement infantryMovementFix = GetComponent<FixMovement>();
+                if (infantryMovementFix != null) infantryMovementFix.isCommandedToMove = true;
                
                 agent.SetDestination(hit.point - GetTargetDirection(hit.point));
                 _gathering = false;

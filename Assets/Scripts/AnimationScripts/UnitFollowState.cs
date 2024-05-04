@@ -46,7 +46,7 @@ public class UnitFollowState : StateMachineBehaviour
         } else
         {
             // if there is no other direct command to move
-            if(animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
+            if(animator.transform.GetComponent<FixMovement>().isCommandedToMove == false)
             {
                 // moving unit towards enemy
                 agent.SetDestination(attackController.targetToAttack.position);

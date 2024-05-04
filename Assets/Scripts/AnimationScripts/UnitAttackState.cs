@@ -29,12 +29,12 @@ public class UnitAttackState : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (animator.transform.GetComponent<UnitMovement>().isCommandedToMove == true)
+        if (animator.transform.GetComponent<FixMovement>().isCommandedToMove == true)
         {
             animator.SetBool("isAttacking", false);
         }
         // check if we have target and if we didnt give another move command
-        if (attackController.targetToAttack != null && animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
+        if (attackController.targetToAttack != null && animator.transform.GetComponent<FixMovement>().isCommandedToMove == false)
         {
             _timer += Time.deltaTime;
             // voi olla buginen myöhemmmin animaatioiden kanssa
