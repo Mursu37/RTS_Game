@@ -16,7 +16,7 @@ namespace Enemy.BasicBug
                 StateController.ChangeState(StateController.SearchState);
                 return;
             }
-            Collider[] colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.attackRange);
+            Collider[] colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.attackRange + 0.1f);
             if (colliders.Length > 0)
             {
                 foreach (var collider in colliders)
@@ -42,8 +42,7 @@ namespace Enemy.BasicBug
         public override void OnFixedUpdate()
         {
             CheckIfTargetInRange();
-            Vector3 targetDirection = (Enemy.target.transform.position - Enemy.transform.position).normalized * 0.1f;
-            Enemy.agent.SetDestination(Enemy.target.transform.position - targetDirection);
+            Enemy.agent.SetDestination(Enemy.target.ClosestPoint(Enemy.transform.position));
         }
     }
 }

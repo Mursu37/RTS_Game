@@ -57,6 +57,7 @@ public class RTSCameraController : MonoBehaviour
         movementSpeed = normalSpeed;
 
         _camera = Camera.main;
+        _camera.fieldOfView = 25f;
     }
 
     private void Update()

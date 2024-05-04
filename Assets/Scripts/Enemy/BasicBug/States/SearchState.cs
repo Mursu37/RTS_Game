@@ -7,9 +7,11 @@ namespace Enemy.BasicBug
     public class SearchState : BasicBugState
     {
         private Vector3 _hq;
+        private Collider _hqCollider;
         public SearchState(StateController stateController, BasicBug enemy) : base(stateController, enemy)
         {
             _hq = GameObject.FindWithTag("HQ").transform.position;
+            _hqCollider = GameObject.FindWithTag("HQ").GetComponentInChildren<Collider>();
         }
 
         private void SearchForTarget()
@@ -40,7 +42,7 @@ namespace Enemy.BasicBug
         public override void OnEnter()
         {
             _hq = GameObject.FindWithTag("HQ").transform.position;
-            Enemy.agent.SetDestination(_hq);
+            Enemy.agent.SetDestination(_hqCollider.ClosestPoint(Enemy.transform.position));
             Enemy.animator.SetTrigger("Run");
         }
         public override void OnExit()

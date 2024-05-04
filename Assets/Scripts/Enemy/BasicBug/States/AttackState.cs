@@ -12,6 +12,7 @@ namespace Enemy.BasicBug
 
         public override void OnEnter()
         {
+            Debug.Log("Attacking");
             Enemy.transform.LookAt(Enemy.target.transform);
             _attackTimer = Enemy.attackSpeed;
             Enemy.animator.SetTrigger("Attack");
@@ -29,7 +30,7 @@ namespace Enemy.BasicBug
                 StateController.ChangeState(StateController.SearchState);
                 return;
             }
-            Collider[] colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.attackRange);
+            Collider[] colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.attackRange + 0.1f);
 
             _enemyInRange = false;
             if (colliders.Length > 0)

@@ -114,23 +114,23 @@ public class PlaceBuilding : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (_resourceManager.CanAfford(60))
+            if (_resourceManager.CanAfford(30))
             {
-                set_building(barrack, 60);
+                set_building(barrack, 30);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_resourceManager.CanAfford(100))
+            if (_resourceManager.CanAfford(50))
             {
-                set_building(turret, 100);
+                set_building(turret, 50);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (_resourceManager.CanAfford(40))
+            if (_resourceManager.CanAfford(20))
             {
-                set_building(supplyDepo, 40);
+                set_building(supplyDepo, 20);
             }
         }
 

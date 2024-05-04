@@ -28,6 +28,8 @@ public class UnitMovement : MonoBehaviour
     private Resource _resourceType;
     private IGatherable _resourceNode;
     private Collider _resourceNodeCollider;
+
+    private Collider _hqCollider;
     private Vector3 _hq;
     private Vector3 _resourceLocation;
     [SerializeField] private TMP_Text resourceText;
@@ -51,21 +53,21 @@ public class UnitMovement : MonoBehaviour
     
     private Vector3 GetClosestDepositionLocation()
     {
-        Vector3 closestPosition = _hq;
         float closestPositionDistance;
-
+        Vector3 currentPosition = transform.position;
+        Vector3 closestPosition = _hqCollider.ClosestPoint(currentPosition);
 
         GameObject[] supplyDepos = GameObject.FindGameObjectsWithTag("SupplyDepo");
         if (supplyDepos.Length == 0) return closestPosition;
 
-
-        closestPositionDistance = (_hq - transform.position).magnitude;
+        closestPositionDistance = (_hqCollider.ClosestPoint(currentPosition) - currentPosition).magnitude;
         foreach (var depo in supplyDepos)
         {
-            float depoDistance = (depo.transform.position - transform.position).magnitude;
+            Vector3 depoClosestPoint = depo.GetComponent<Collider>().ClosestPoint(currentPosition);
+            float depoDistance = (depoClosestPoint - currentPosition).magnitude;
             if (depoDistance < closestPositionDistance)
             {
-                closestPosition = depo.transform.position;
+                closestPosition = depoClosestPoint;
                 closestPositionDistance = depoDistance;
             }
         }
@@ -85,7 +87,8 @@ public class UnitMovement : MonoBehaviour
         _repairedAmount = 0;
         // repair 2.5 times a second. repairs one health at a time
         _repairSpeed = 1 / 2.5f;
-        _hq = GameObject.FindWithTag("HQ").transform.position;
+        _hqCollider = GameObject.FindWithTag("HQ").GetComponentInChildren<Collider>();
+        _hq = _hqCollider.transform.position;
     }
 
     private void Start()
@@ -125,8 +128,9 @@ public class UnitMovement : MonoBehaviour
             {
                 Vector3 depositionLocation = GetClosestDepositionLocation();
                 agent.SetDestination(depositionLocation - GetTargetDirection(depositionLocation));
-                yield return new WaitForFixedUpdate();
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForSeconds(0.1f);
+                Debug.Log(agent.remainingDistance);
+                Debug.Log(depositionLocation);
                 
                 if (agent.remainingDistance <= 0.5f)
                 {
@@ -141,7 +145,7 @@ public class UnitMovement : MonoBehaviour
                         break;
                     }
                     
-                    agent.SetDestination(_resourceLocation - GetTargetDirection(_resourceLocation));
+                    agent.SetDestination(_resourceNodeCollider.ClosestPoint(transform.position));
                     yield return new WaitForFixedUpdate();
                 }
                 else
@@ -207,7 +211,9 @@ public class UnitMovement : MonoBehaviour
                 isCommandedToMove = true;
                 _gathering = false;
                 _repairing = false;
-                agent.SetDestination(hit.transform.position - GetTargetDirection(hit.transform.position));
+                Vector3 destination;
+                destination = hit.collider.ClosestPoint(transform.position);
+                agent.SetDestination(destination);
                 if (hit.transform.CompareTag("ResourceNode") && !_gathering)
                 {
                     _resourceNode = hit.collider.GetComponent<IGatherable>();
@@ -221,6 +227,7 @@ public class UnitMovement : MonoBehaviour
                     resourceText.text = "";
                     StartCoroutine(Gather());
                 }
+                
                 else if (hit.collider.GetComponent<IBuilding>() != null && !_repairing)
                 {
                     _building = hit.collider.GetComponent<IDamageable>();
@@ -234,10 +241,9 @@ public class UnitMovement : MonoBehaviour
             {
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
+                Debug.Log(hit.point);
                
                 agent.SetDestination(hit.point - GetTargetDirection(hit.point));
-               
-                
                 _gathering = false;
                 _repairing = false;
             }

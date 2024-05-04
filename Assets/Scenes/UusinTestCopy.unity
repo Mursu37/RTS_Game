@@ -5411,7 +5411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building: {fileID: 3282832441774271797, guid: be417b38295d5194e9f5beb0728fe055, type: 3}
-  price: 60
+  price: 30
   name: Production
 --- !u!114 &573177968
 MonoBehaviour:
@@ -9078,7 +9078,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 15
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -11331,11 +11331,11 @@ MonoBehaviour:
   units:
   - name: Worker
     unit: {fileID: 7925950012221031650, guid: e1825c08d1bb04607be7632b73d9097e, type: 3}
-    cost: 40
+    cost: 35
     timeToBuild: 20
   - name: Infantry
     unit: {fileID: 1229642135674910964, guid: 05c0ccb5c50fd418992aa49c823abf8b, type: 3}
-    cost: 25
+    cost: 20
     timeToBuild: 10
 --- !u!4 &1245290769
 Transform:
@@ -14708,7 +14708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building: {fileID: 1535253107942243968, guid: 2d1288212173a4791899afd295f114d3, type: 3}
-  price: 100
+  price: 50
   name: Turret
 --- !u!114 &1661768076
 MonoBehaviour:
@@ -17397,7 +17397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building: {fileID: 1844965612496155979, guid: 034068218415e40078084970d938deb5, type: 3}
-  price: 40
+  price: 20
   name: Supply depo
 --- !u!114 &1974156421
 MonoBehaviour:

@@ -259,7 +259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 005c728bb8256428c9481a8c77f60f3e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 005c728bb8256428c9481a8c77f60f3e, type: 3}
+      propertyPath: m_TagString
+      value: SupplyDepo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
