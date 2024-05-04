@@ -90,36 +90,6 @@ namespace Enemy.Spawning
         private Vector3 GetSpawnPosition()
         {
             return _spawnLocations[Random.Range(0, _spawnLocations.Count)].transform.position;
-            /*
-            float xPosition = Random.Range(-20, 35);
-            float zPosition = Random.Range(-20, 40);
-
-            // if elevation is added to the map y check needs to be reworked
-            float yPosition = _hqLocation.y;
-
-            if (!Physics.Raycast(new Vector3(xPosition, 100, zPosition), Vector3.down,
-                    1000f, LayerMask.GetMask("Obstacle"), QueryTriggerInteraction.Collide))
-            {
-                Collider[] colliders = Physics.OverlapSphere(new Vector3(xPosition, yPosition, zPosition),
-                    _minSpawnDistance, ~LayerMask.GetMask("Ground", "Obstacle"), QueryTriggerInteraction.Collide);
-
-                bool viableSpawn = true;
-                foreach (var collider in colliders)
-                {
-                    if (!collider.CompareTag("Enemy"))
-                    {
-                        viableSpawn = false;
-                        break;
-                    }
-                }
-
-                if (viableSpawn)
-                {
-                    return new Vector3(xPosition, yPosition, zPosition);
-                }
-            }
-            return GetSpawnPosition();
-            */
         }
 
         IEnumerator spawnEnemies()
