@@ -11,7 +11,7 @@ public class Infantry : Unit
     
     private void Awake()
     {
-        MaxHealth = 100000f;
+        MaxHealth = 100f;
     }
     
     void Start()
