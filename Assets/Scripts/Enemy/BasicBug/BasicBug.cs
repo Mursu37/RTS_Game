@@ -22,7 +22,7 @@ namespace Enemy.BasicBug
             aggroRange = 5f;
             attackRange = 1f;
             attackSpeed = 0.625f;
-            attackDamage = 4f; // 4
+            attackDamage = 0.0004f; // 4
             
             movementSpeed = 5f;
             
