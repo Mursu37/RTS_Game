@@ -5,7 +5,7 @@ namespace Projectiles
 {
     public class UnitBullet : MonoBehaviour
     {
-        private float _speed = 15f;
+        private float _speed = 25f;
 
         private Vector3 _targetPosition;
         private Vector3 _targetDirection;
@@ -22,6 +22,17 @@ namespace Projectiles
         }
 
         private void Update()
+        {
+            if (target == null) Destroy(transform.parent.gameObject);
+            else
+            {
+                transform.parent.transform.LookAt(target.transform, Vector3.up);
+                _targetDirection = (_targetPosition - transform.position).normalized;
+                transform.position += _targetDirection * (_speed * Time.deltaTime);   
+            }
+        }
+
+        private void Start()
         {
             if (target == null) Destroy(transform.parent.gameObject);
             else
