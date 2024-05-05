@@ -28,7 +28,7 @@ public class UnitAttackState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        attackController.FindHigherPriorityTarget();
         if (animator.transform.GetComponent<FixMovement>().isCommandedToMove == true)
         {
             animator.SetBool("isAttacking", false);
@@ -73,7 +73,8 @@ public class UnitAttackState : StateMachineBehaviour
         }
         if (attackController.targetToAttack == null)
         {
-                animator.SetBool("isAttacking", false); // move back to follow state 
+            agent.SetDestination(unit.transform.position);
+            animator.SetBool("isAttacking", false); // move back to follow state 
         }
 
     }

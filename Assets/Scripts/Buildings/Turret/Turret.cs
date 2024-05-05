@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Buildings.Turret
 {
-    public class Turret : Building
+    public class Turret : Building, IPriority
     {
+        public int Priority { get; set; } = 3;
+        
         private Collider _target;
         private float _attackDamage;
         private float _attackSpeed;

@@ -9,6 +9,7 @@ namespace Enemy.Spawning
 {
     public class EnemySpawning : MonoBehaviour
     {
+        public static EnemySpawning Instance { get; set; }
 
         public List<SpawnableEnemy> Enemies = new List<SpawnableEnemy>();
         private List<SpawnableEnemy> _spawnableEnemies;
@@ -27,7 +28,7 @@ namespace Enemy.Spawning
         private float _timeBetweenSpawns;
 
         [SerializeField] private GameObject hive;
-        private List<GameObject> _spawnLocations = new List<GameObject>();
+        public List<GameObject> spawnLocations = new List<GameObject>();
         
         private void Awake()
         {
@@ -40,6 +41,16 @@ namespace Enemy.Spawning
             _waveValue = 10;
             // Time between waves after first
             _timeBetweenWaves = 45f;
+            
+            if(Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            } 
+            else
+            {
+                Instance = this;
+            
+            }
         }
 
         private void CreateHives(int amount)
@@ -54,8 +65,9 @@ namespace Enemy.Spawning
                 var newHive = Instantiate(hive,
                     possibleHiveLocations[index].transform.position,
                     Quaternion.identity);
+                Destroy(possibleHiveLocations[index]);
                 possibleHiveLocations.RemoveAt(index);
-                _spawnLocations.Add(newHive);
+                spawnLocations.Add(newHive);
             }
 
             // Destroy Hive spawn locations
@@ -92,7 +104,7 @@ namespace Enemy.Spawning
         
         private Vector3 GetSpawnPosition()
         {
-            return _spawnLocations[Random.Range(0, _spawnLocations.Count)].transform.position;
+            return spawnLocations[Random.Range(0, spawnLocations.Count)].transform.position;
         }
 
         IEnumerator spawnEnemies()

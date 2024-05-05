@@ -322,6 +322,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dd53c59a07d04077a31efd8c46a1b90, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1215172633257288971}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dd53c59a07d04077a31efd8c46a1b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7270120734627229237}
   m_SourcePrefab: {fileID: 100100000, guid: 0dd53c59a07d04077a31efd8c46a1b90, type: 3}
 --- !u!4 &7483739356120013664 stripped
 Transform:
@@ -373,7 +376,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.403122, y: 5.270931, z: 9.577519}
+  m_Size: {x: 10.40312, y: 5.270931, z: 9.577519}
   m_Center: {x: 0.15162444, y: 2.1354654, z: 3.920076}
 --- !u!114 &2343918684172338581
 MonoBehaviour:
@@ -388,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthTracker: {fileID: 1514422582619595037}
+  basicBug: {fileID: 8344922104889914377, guid: 84730855057f142bc924643687fcb31c, type: 3}
 --- !u!208 &1215172633257288971
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -404,3 +408,30 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!54 &7270120734627229237
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822829413926732250}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

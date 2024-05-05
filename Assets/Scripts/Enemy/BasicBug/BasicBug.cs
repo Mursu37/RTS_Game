@@ -3,8 +3,9 @@ using UnityEngine.AI;
 
 namespace Enemy.BasicBug
 {
-    public class BasicBug : Enemy
+    public class BasicBug : Enemy, IPriority
     {
+        public int Priority { get; set; } = 2;
         private StateController StateController { get; set; }
         
         public Collider target;
@@ -42,7 +43,7 @@ namespace Enemy.BasicBug
 
         public bool FindHigherPriorityTarget()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, aggroRange);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, aggroRange, ~LayerMask.GetMask("Attackble"));
             if (colliders.Length > 0)
             {
                 Collider highestPriorityTarget = FindHighestPriority(colliders);
@@ -59,11 +60,11 @@ namespace Enemy.BasicBug
 
         private void Awake()
         {
-            MaxHealth = 50f;
+            MaxHealth = 75f;
             aggroRange = 5f;
-            attackRange = 1f;
+            attackRange = 1.25f;
             attackSpeed = 0.625f;
-            attackDamage = 4f; // 4
+            attackDamage = 5f; // 4
             
             movementSpeed = 5f;
             currentTargetPriorityValue = 1;

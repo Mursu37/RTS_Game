@@ -13,6 +13,8 @@ public class AttackController : MonoBehaviour
     //   public int unitDamage; // turha atm
     private Unit unit;
 
+    public int currentTargetPriorityValue = 1;
+
     private void Start()
     {
         unit = GetComponent<Unit>();
@@ -32,6 +34,55 @@ public class AttackController : MonoBehaviour
         {
             targetToAttack = null;
         }
+    }
+    
+    public Collider FindHighestPriority(Collider[] targets)
+    {
+        Collider highestPriorityTarget = targets[0];
+        var currentHighestPriorityValue = 1;
+
+        foreach (var collider in targets)
+        {
+            var priority = collider.GetComponent<IPriority>();
+            if (priority != null)
+            {
+                if (priority.Priority > currentHighestPriorityValue)
+                {
+                    highestPriorityTarget = collider;
+                    currentHighestPriorityValue = priority.Priority;
+                }
+            }
+        }
+
+        return currentHighestPriorityValue > currentTargetPriorityValue ? highestPriorityTarget : targetToAttack.GetComponent<Collider>();
+    }
+
+    public bool FindHigherPriorityTarget()
+    {
+        Collider target;
+        if (targetToAttack == null)
+        {
+            currentTargetPriorityValue = 0;
+            target = null;
+        }
+        else
+        {
+            target = targetToAttack.GetComponent<Collider>();
+        }
+        
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 8, LayerMask.GetMask("Attackble"));
+        if (colliders.Length > 0)
+        {
+            Collider highestPriorityTarget = FindHighestPriority(colliders);
+            if (highestPriorityTarget != target)
+            {
+                targetToAttack = highestPriorityTarget.transform;
+                currentTargetPriorityValue = highestPriorityTarget.GetComponent<IPriority>().Priority;
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

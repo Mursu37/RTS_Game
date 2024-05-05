@@ -27,9 +27,6 @@ public class Infantry : Unit
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
         SetupNavMeshAgent();
-        
-
-
     }
 
     public override void Die()
@@ -37,10 +34,7 @@ public class Infantry : Unit
         animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
         Destroy(gameObject, delay);
-        
     }
-
-
 
 
     private void OnDestroy()

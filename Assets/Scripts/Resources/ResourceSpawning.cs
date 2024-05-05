@@ -33,7 +33,6 @@ namespace Resources
                 int index = Random.Range(0, _resourceSpawnLocations.Count);
                 resourcePosition = _resourceSpawnLocations[index]
                     .transform.position;
-                Debug.Log(resourcePosition);
                 Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
                 _resourceSpawnLocations.RemoveAt(index);
             }
