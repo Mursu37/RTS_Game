@@ -9,6 +9,7 @@ namespace Enemy.Spawning
 {
     public class EnemySpawning : MonoBehaviour
     {
+        [SerializeField] private GameObject winScreen;
         public static EnemySpawning Instance { get; set; }
 
         public List<SpawnableEnemy> Enemies = new List<SpawnableEnemy>();
@@ -76,6 +77,14 @@ namespace Enemy.Spawning
                 Destroy(hives);
             }
             
+        }
+
+        public void HiveDestroyed()
+        {
+            if (spawnLocations.Count <= 0)
+            {
+                winScreen.SetActive(true);
+            }
         }
 
         private void GenerateWave(int value)

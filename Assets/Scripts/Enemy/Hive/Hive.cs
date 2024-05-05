@@ -50,6 +50,7 @@ namespace Enemy.Hive
         public void Die()
         {
             _enemySpawningManager.spawnLocations.Remove(transform.parent.gameObject);
+            _enemySpawningManager.HiveDestroyed();
             Destroy(transform.parent.gameObject);
         }
 
