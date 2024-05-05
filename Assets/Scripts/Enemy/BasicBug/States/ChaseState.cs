@@ -36,11 +36,13 @@ namespace Enemy.BasicBug
         }
         public override void OnExit()
         {
+            if (Enemy.target == null) Enemy.currentTargetPriorityValue = 0;
             Enemy.animator.ResetTrigger("Run");
         }
 
         public override void OnFixedUpdate()
         {
+            Enemy.FindHigherPriorityTarget();
             CheckIfTargetInRange();
             Enemy.agent.SetDestination(Enemy.target.ClosestPoint(Enemy.transform.position));
         }

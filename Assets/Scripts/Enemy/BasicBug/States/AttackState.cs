@@ -20,6 +20,7 @@ namespace Enemy.BasicBug
 
         public override void OnExit()
         {
+            if (Enemy.target == null) Enemy.currentTargetPriorityValue = 0;
             Enemy.animator.ResetTrigger("Attack");
         }
 
@@ -58,6 +59,7 @@ namespace Enemy.BasicBug
 
         public override void OnFixedUpdate()
         {
+            if (Enemy.FindHigherPriorityTarget()) StateController.ChangeState(StateController.ChaseState);
             _attackTimer -= Time.fixedDeltaTime;
             if (_attackTimer <= 0)
             {

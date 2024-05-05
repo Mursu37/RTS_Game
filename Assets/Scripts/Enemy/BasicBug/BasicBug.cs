@@ -6,7 +6,10 @@ namespace Enemy.BasicBug
     public class BasicBug : Enemy
     {
         private StateController StateController { get; set; }
+        
         public Collider target;
+        public int currentTargetPriorityValue;
+        
         public float aggroRange;
         public float attackRange;
         public float attackSpeed;
@@ -15,6 +18,44 @@ namespace Enemy.BasicBug
         public Animator animator;
 
         //public NavMeshAgent agent;
+        
+        public Collider FindHighestPriority(Collider[] targets)
+        {
+            Collider highestPriorityTarget = targets[0];
+            var currentHighestPriorityValue = 1;
+
+            foreach (var collider in targets)
+            {
+                var priority = collider.GetComponent<IPriority>();
+                if (priority != null)
+                {
+                    if (priority.Priority > currentHighestPriorityValue)
+                    {
+                        highestPriorityTarget = collider;
+                        currentHighestPriorityValue = priority.Priority;
+                    }
+                }
+            }
+
+            return currentHighestPriorityValue > currentTargetPriorityValue ? highestPriorityTarget : target;
+        }
+
+        public bool FindHigherPriorityTarget()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, aggroRange);
+            if (colliders.Length > 0)
+            {
+                Collider highestPriorityTarget = FindHighestPriority(colliders);
+                if (highestPriorityTarget != target)
+                {
+                    target = highestPriorityTarget;
+                    currentTargetPriorityValue = target.GetComponent<IPriority>().Priority;
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void Awake()
         {
@@ -22,9 +63,10 @@ namespace Enemy.BasicBug
             aggroRange = 5f;
             attackRange = 1f;
             attackSpeed = 0.625f;
-            attackDamage = 0.0004f; // 4
+            attackDamage = 4f; // 4
             
             movementSpeed = 5f;
+            currentTargetPriorityValue = 1;
             
             agent = GetComponent<NavMeshAgent>();
 
