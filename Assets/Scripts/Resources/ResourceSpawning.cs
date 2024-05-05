@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,7 +9,7 @@ namespace Resources
     public class ResourceSpawning : MonoBehaviour
     {
         [SerializeField] private GameObject _resourceNodePrefab;
-        private GameObject[] _resourceSpawnLocations;
+        private List<GameObject> _resourceSpawnLocations;
         private GameObject[] _closeResourceSpawnLocations;
         
         // how many resource nodes are spawned
@@ -15,21 +17,25 @@ namespace Resources
 
         private void Awake()
         {
-            _resourceSpawnLocations = GameObject.FindGameObjectsWithTag("ResourceSpawnLocation");
+            var temp = GameObject.FindGameObjectsWithTag("ResourceSpawnLocation");
+            _resourceSpawnLocations = temp.ToList();
             _closeResourceSpawnLocations = GameObject.FindGameObjectsWithTag("CloseResourceSpawnLocation");
-            
             // spawn one close resource spawn
             Vector3 resourcePosition = _closeResourceSpawnLocations[Random.Range(0, _closeResourceSpawnLocations.Length)]
                 .transform.position;
+            Debug.Log(resourcePosition);
             Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
             _resourceNodeCount--;
             
             // spawn resource node at some of the locations randomly
             for (int i = 0; i < _resourceNodeCount; i++)
             {
-                resourcePosition = _resourceSpawnLocations[Random.Range(0, _resourceSpawnLocations.Length)]
+                int index = Random.Range(0, _resourceSpawnLocations.Count);
+                resourcePosition = _resourceSpawnLocations[index]
                     .transform.position;
+                Debug.Log(resourcePosition);
                 Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
+                _resourceSpawnLocations.RemoveAt(index);
             }
 
             // get rid of all the garbage
