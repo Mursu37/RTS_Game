@@ -5,14 +5,16 @@ namespace Buildings.HQ
 {
     public class HQ : Building
     {
+        public GameObject EndScreen;
         private void Awake()
         {
-            MaxHealth = 500f;
+            MaxHealth = 15f;
         }
         public override void Die()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           
             Destroy(gameObject);
+            EndScreen.SetActive(true);
         }
     }
 }
