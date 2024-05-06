@@ -25,7 +25,7 @@ namespace Resources
                 .transform.position;
             Debug.Log(resourcePosition);
             var closeNode = Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
-            closeNode.GetComponent<TitaniumNode>().SetNearNode();
+            closeNode.GetComponentInChildren<TitaniumNode>().SetNearNode();
             _resourceNodeCount--;
             
             // spawn resource node at some of the locations randomly
