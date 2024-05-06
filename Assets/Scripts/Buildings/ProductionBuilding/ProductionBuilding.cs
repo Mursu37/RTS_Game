@@ -130,7 +130,7 @@ namespace Buildings.ProductionBuilding
                 // check that target is not null, is close enough and is not full health
                 // if condition is filled keep healing same unit until full health
                 if (target != null &&
-                    (targetCollider.transform.position - transform.position).magnitude < 2.5f &&
+                    (targetCollider.transform.position - transform.position).magnitude < 14f &&
                     target.CurrentHealth < target.MaxHealth)
                 {
                     var heal = Instantiate(healPrefab, transform.position, Quaternion.identity).GetComponent<Healing>();
@@ -141,17 +141,18 @@ namespace Buildings.ProductionBuilding
                 }
                 
                 // find units
-                Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(2f, 2f, 2f),
+                Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(14f, 14f, 14f),
                     Quaternion.identity,
-                    ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Collide);
+                    ~LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
 
                 // if previous condition was not met look for new units and take one
                 target = null;
                 foreach (var collider in colliders)
                 {
                     var unit = collider.GetComponent<Unit>();
-                    if (unit != null)
+                    if (unit != null && Vector3.Distance(transform.position, collider.transform.position) <= 14f)
                     {
+                        Debug.Log("hello");
                         if ((unit.CurrentHealth / unit.MaxHealth) >= 1f) continue;
                         target = unit;
                         targetCollider = collider;

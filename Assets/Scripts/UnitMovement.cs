@@ -289,12 +289,12 @@ public class UnitMovement : MonoBehaviour
                     }
                 }
                 int movePositionListIndex = 0;
-                Debug.Log("Contents of selectedUnits:");
+                //Debug.Log("Contents of selectedUnits:");
 
                 foreach (GameObject unit in selectedUnits)
                 {
-                    Debug.Log(unit.name);
-                    Debug.Log(movePositionList[movePositionListIndex]);
+                    //Debug.Log(unit.name);
+                    //Debug.Log(movePositionList[movePositionListIndex]);
                     agent = unit.GetComponent<NavMeshAgent>();
                     agent.SetDestination(movePositionList[movePositionListIndex]);
                     movePositionListIndex = (movePositionListIndex + 1) % movePositionList.Count;

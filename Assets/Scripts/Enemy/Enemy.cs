@@ -20,7 +20,6 @@ namespace Enemy
         public void Damage(float amount)
         {
             CurrentHealth -= amount;
-            Debug.Log(amount);
             if (CurrentHealth <= 0)
             {
                 Die();

@@ -49,10 +49,13 @@ namespace Enemy.BasicBug
                 Collider highestPriorityTarget = FindHighestPriority(colliders);
                 if (highestPriorityTarget != target)
                 {
-                    target = highestPriorityTarget;
-                    int priority = target.GetComponent<IPriority>().Priority;
-                    if (priority != null) currentTargetPriorityValue = priority;
-                    return true;
+                    if (target != null)
+                    {
+                        target = highestPriorityTarget;
+                        int priority = target.GetComponent<IPriority>().Priority;
+                        if (priority != null) currentTargetPriorityValue = priority;
+                        return true;
+                    }
                 }
             }
 
