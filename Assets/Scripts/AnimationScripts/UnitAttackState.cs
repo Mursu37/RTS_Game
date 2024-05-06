@@ -12,6 +12,7 @@ public class UnitAttackState : StateMachineBehaviour
     AttackController attackController;
     Unit unit;
     private float _timer = 0;
+    Collider x;
 
     public float stopAttackingDistance;
     
@@ -22,12 +23,14 @@ public class UnitAttackState : StateMachineBehaviour
         //attackController.SetAttackMaterial();
         unit = animator.GetComponent<Unit>();
         stopAttackingDistance = unit.stopAttackDistance;
+        x = attackController.targetToAttack.GetComponent<Collider>();
 
         agent.stoppingDistance = unit.attackRange * 0.9f; // nav mesh stop distance tätä pitää säätää vielä, ehkä toteutetaan muulla tavalla.
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         attackController.FindHigherPriorityTarget();
         if (animator.transform.GetComponent<FixMovement>().isCommandedToMove == true)
         {
@@ -41,7 +44,7 @@ public class UnitAttackState : StateMachineBehaviour
             LookAtTarget();
 
             // moving to enemy
-            agent.SetDestination(attackController.targetToAttack.position);
+            //agent.SetDestination(attackController.targetToAttack.position);
             agent.stoppingDistance = unit.attackRange - 0.2f;
             
             // actually perform attack
@@ -61,7 +64,7 @@ public class UnitAttackState : StateMachineBehaviour
             }
 
             // should unit still attack
-            float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
+            float distanceFromTarget = Vector3.Distance(x.ClosestPoint(animator.transform.position), animator.transform.position);
 
             if (distanceFromTarget > stopAttackingDistance || attackController.targetToAttack == null)
             {

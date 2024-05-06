@@ -46,15 +46,16 @@ public class UnitFollowState : StateMachineBehaviour
             if(animator.transform.GetComponent<FixMovement>().isCommandedToMove == false)
             {
                 // moving unit towards enemy
-                agent.SetDestination(attackController.targetToAttack.position);
+                Collider x = attackController.targetToAttack.GetComponent<Collider>();
+                agent.SetDestination(x.ClosestPoint(animator.transform.position));
                 //animator.transform.LookAt(attackController.targetToAttack);
 
 
               //  should unit transition to attack state?
-                float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
+                float distanceFromTarget = Vector3.Distance(x.ClosestPoint(animator.transform.position), animator.transform.position);
                 //Debug.Log(distanceFromTarget);
 
-                if (distanceFromTarget < unit.attackRange)
+                if ((distanceFromTarget + 0.5f) < unit.attackRange)
                 {
                     agent.SetDestination(animator.transform.position);
                     animator.SetBool("isAttacking", true); // move to attacking state
