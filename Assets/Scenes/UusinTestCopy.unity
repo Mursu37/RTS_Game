@@ -7894,8 +7894,8 @@ MonoBehaviour:
   moveWithKeyboad: 1
   moveWithEdgeScrolling: 1
   moveWithMouseDrag: 1
-  fastSpeed: 0.2
-  normalSpeed: 0.1
+  fastSpeed: 0.8
+  normalSpeed: 0.4
   movementSensitivity: 35
   edgeSize: 30
   cursorArrowUp: {fileID: 2800000, guid: c275c73bcbad72b468097f2745edf37a, type: 3}

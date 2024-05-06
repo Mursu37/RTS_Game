@@ -99,7 +99,7 @@ public class RTSCameraController : MonoBehaviour
         // Keyboard Control
         if (moveWithKeyboad)
         {
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 movementSpeed = fastSpeed;
             }
