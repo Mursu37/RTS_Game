@@ -186,6 +186,7 @@ public class UnitMovement : MonoBehaviour
     
     private void Update()
     {
+        var selectedUnits = UnitSelectionManager.Instance.unitsSelected;
         // HAISTA VITTU NAVMESH / CARVE
         if (agent.hasPath == false || agent.remainingDistance <= agent.stoppingDistance)
         {
@@ -241,6 +242,7 @@ public class UnitMovement : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Attackble")))
             {
+                
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = false;
 
@@ -254,6 +256,37 @@ public class UnitMovement : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
+                //Vector3 moveDestination = hit.point;
+                //int unitCount = selectedUnits.Count;
+                //int rowCount = Mathf.CeilToInt(Mathf.Sqrt(unitCount));
+                //int colCount = Mathf.CeilToInt((float)unitCount / rowCount);
+
+                //// Calculate the spacing between units
+                //float spacingX = 2f; // Adjust as needed
+                //float spacingZ = 2f; // Adjust as needed
+                //List<Vector3> movePositionList = new List<Vector3>();
+                //for (int row = 0; row < rowCount; row++)
+                //{
+                //    for (int col = 0; col < colCount; col++)
+                //    {
+                //        float posX = col * spacingX;
+                //        float posZ = row * spacingZ;
+                //        Vector3 position = moveDestination + new Vector3(posX, 0, posZ);
+                //        movePositionList.Add(position);
+                //    }
+                //}
+                //int movePositionListIndex = 0;
+                //Debug.Log("Contents of selectedUnits:");
+                
+                //foreach (GameObject unit in selectedUnits)
+                //{
+                //    Debug.Log(unit.name);
+                //    Debug.Log(movePositionList[movePositionListIndex]);
+                //    agent = unit.GetComponent<NavMeshAgent>();
+                //    agent.SetDestination(movePositionList[movePositionListIndex]);
+                //    movePositionListIndex = (movePositionListIndex + 1) % movePositionList.Count;
+
+                //}
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
                 if (!this.CompareTag("Worker"))
@@ -271,6 +304,8 @@ public class UnitMovement : MonoBehaviour
             }
         }
     }
+    
+  
 
     private void FixedUpdate()
     {

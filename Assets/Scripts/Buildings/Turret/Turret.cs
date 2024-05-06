@@ -34,7 +34,7 @@ namespace Buildings.Turret
 
             _attackDamage = 4f;
             _attackSpeed = 1 / 7.5f;
-            _attackRange = 9f;
+            _attackRange = 10f;
 
             _searchingForTarget = true;
             _turretOn = true;
@@ -78,7 +78,7 @@ namespace Buildings.Turret
             {
 
                 yield return new WaitForSeconds(0.25f);
-                Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRange - 1,
+                Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRange,
                     LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
 
                 if (colliders.Length > 0)

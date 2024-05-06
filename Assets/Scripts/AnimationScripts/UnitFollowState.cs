@@ -30,7 +30,7 @@ public class UnitFollowState : StateMachineBehaviour
         // should unit transition to idle state?
         if (attackController.targetToAttack == null)
         {
-            var colliders = Physics.OverlapSphere(animator.transform.position, 8, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
+            var colliders = Physics.OverlapSphere(animator.transform.position, 10, LayerMask.GetMask("Attackble"), QueryTriggerInteraction.Collide);
             if (colliders.Length > 0)
             {
                 attackController.targetToAttack = colliders[0].transform;
@@ -52,7 +52,7 @@ public class UnitFollowState : StateMachineBehaviour
 
               //  should unit transition to attack state?
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
-                Debug.Log(distanceFromTarget);
+                //Debug.Log(distanceFromTarget);
 
                 if (distanceFromTarget < unit.attackRange)
                 {

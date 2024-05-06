@@ -32,7 +32,7 @@ public class UnitMoveState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log(animator.GetBool("isMoving"));
+        //Debug.Log(animator.GetBool("isMoving"));
         if (agent == null) return;
 
         if (agent != null && (agent.remainingDistance <= agent.stoppingDistance && !agent.hasPath))
@@ -44,17 +44,17 @@ public class UnitMoveState : StateMachineBehaviour
         if (unitMovement != null && !unitMovement.isCommandedToMove)
         {
             animator.SetBool("isMoving", false);
-            Debug.Log("test");
+            //Debug.Log("test");
         }
 
-        Debug.Log(animator.GetBool("isMoving"));
+        //Debug.Log(animator.GetBool("isMoving"));
     }
 
     
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("test2");
+        //Debug.Log("test2");
     }
 
 
