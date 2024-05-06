@@ -13,6 +13,8 @@ namespace UI.BuildingPlacement
 
         [SerializeField]
         private new string name;
+
+        [SerializeField] private new string description;
         
         private void Awake()
         {
@@ -23,7 +25,7 @@ namespace UI.BuildingPlacement
         {
             _placementManager = PlaceBuilding.Instance;
             _resourceManager = ResourceManager.Instance;
-            _text.text = "Name: " + name + "\nPrice: " +
+            _text.text = "Name: " + name + "\n"+ description + "\nPrice: " +
                          price + "\nBuild time: " +
                          "5s";
         }

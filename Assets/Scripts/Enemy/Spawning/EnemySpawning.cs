@@ -39,7 +39,7 @@ namespace Enemy.Spawning
             // Time until first wave
             _untilNextWave = 45f;
             // Size of first wave. 10 = 2 bugs
-            _waveValue = 15;
+            _waveValue = 10;
             // Time between waves after first
             _timeBetweenWaves = 45f;
             
@@ -135,7 +135,7 @@ namespace Enemy.Spawning
             {
                 _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
-                _waveValue = (int) (_waveValue * 1.3f); // 1.2f default. change this to scale waves faster
+                _waveValue = (int) (_waveValue * 1.15f + 5f); // 1.2f default. change this to scale waves faster
                 StartCoroutine(spawnEnemies());
             }
         }
