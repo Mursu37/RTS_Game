@@ -37,11 +37,11 @@ namespace Enemy.Spawning
             _hqLocation = GameObject.FindGameObjectWithTag("HQ").transform.position;
             
             // Time until first wave
-            _untilNextWave = 45f;
+            _untilNextWave = 45f; // 45
             // Size of first wave. 10 = 2 bugs
             _waveValue = 10;
             // Time between waves after first
-            _timeBetweenWaves = 40f;
+            _timeBetweenWaves = 40f; // 40
             
             if(Instance != null && Instance != this)
             {

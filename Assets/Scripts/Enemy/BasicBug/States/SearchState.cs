@@ -42,7 +42,7 @@ namespace Enemy.BasicBug
         public override void OnEnter()
         {
             _hq = GameObject.FindWithTag("HQ").transform.position;
-            Enemy.agent.SetDestination(_hqCollider.ClosestPoint(Enemy.transform.position));
+            Enemy.agent.SetDestination(_hqCollider.ClosestPoint(Enemy.transform.position) + new Vector3(Random.Range(0, 15f), 0, Random.Range(0, 15f)));
             Enemy.animator.SetTrigger("Run");
         }
         public override void OnExit()
@@ -53,6 +53,8 @@ namespace Enemy.BasicBug
         public override void OnFixedUpdate()
         {
             SearchForTarget();
+            if (!Enemy.agent.pathPending && !Enemy.agent.hasPath)
+                Enemy.agent.SetDestination(_hqCollider.ClosestPoint(Enemy.transform.position));
         }
     }
 }
