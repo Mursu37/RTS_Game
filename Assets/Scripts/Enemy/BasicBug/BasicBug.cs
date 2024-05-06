@@ -50,7 +50,8 @@ namespace Enemy.BasicBug
                 if (highestPriorityTarget != target)
                 {
                     target = highestPriorityTarget;
-                    currentTargetPriorityValue = target.GetComponent<IPriority>().Priority;
+                    int priority = target.GetComponent<IPriority>().Priority;
+                    if (priority != null) currentTargetPriorityValue = priority;
                     return true;
                 }
             }

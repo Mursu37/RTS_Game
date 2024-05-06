@@ -43,9 +43,12 @@ namespace Enemy.BasicBug
                         // TODO Make turning smooth
                         Enemy.transform.LookAt(Enemy.target.transform);
                         var damageble = collider.GetComponent<IDamageable>();
-                        damageble.Damage(Enemy.attackDamage);
-                        _attackTimer = Enemy.attackSpeed;
-                        _enemyInRange = true;
+                        if (damageble != null)
+                        {
+                            damageble.Damage(Enemy.attackDamage);
+                            _attackTimer = Enemy.attackSpeed;
+                            _enemyInRange = true;
+                        }
                     }
                 }
             }
