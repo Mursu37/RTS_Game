@@ -184,6 +184,19 @@ public class UnitMovement : MonoBehaviour
         return false;
     }
     
+    private bool _isBuilding;
+    public void SetAsWorker()
+    {
+        _isBuilding = true;
+        resourceText.text = "Building";
+    }
+
+    public void DisableAsWorker()
+    {
+        _isBuilding = false;
+        resourceText.text = "";
+    }
+    
     private void Update()
     {
         var selectedUnits = UnitSelectionManager.Instance.unitsSelected;
