@@ -14,6 +14,7 @@ public class UnitMovement : MonoBehaviour
     NavMeshAgent agent;
     private Animator animator;
     public LayerMask ground;
+    AttackController attackController;
 
 
     public bool isCommandedToMove;
@@ -96,6 +97,7 @@ public class UnitMovement : MonoBehaviour
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        attackController = GetComponent<AttackController>();
     }
 
     IEnumerator Repair()
@@ -237,15 +239,29 @@ public class UnitMovement : MonoBehaviour
                     StartCoroutine(Repair());
                 }
             }
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Attackble")))
+            {
+                agent.stoppingDistance = 0.5f;
+                isCommandedToMove = false;
+
+                //fix for infantry movement without having to rewrite unit selection script
+                FixMovement infantryMovementFix = GetComponent<FixMovement>();
+                if (infantryMovementFix != null) infantryMovementFix.isCommandedToMove = false;
+
+                agent.SetDestination(hit.point - GetTargetDirection(hit.point));
+                _gathering = false;
+                _repairing = false;
+            }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
-                
+                attackController.targetToAttack = null;
+
                 //fix for infantry movement without having to rewrite unit selection script
                 FixMovement infantryMovementFix = GetComponent<FixMovement>();
                 if (infantryMovementFix != null) infantryMovementFix.isCommandedToMove = true;
-               
+
                 agent.SetDestination(hit.point - GetTargetDirection(hit.point));
                 _gathering = false;
                 _repairing = false;

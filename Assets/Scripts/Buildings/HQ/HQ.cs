@@ -8,7 +8,7 @@ namespace Buildings.HQ
         public GameObject EndScreen;
         private void Awake()
         {
-            MaxHealth = 15f;
+            MaxHealth = 500f;
         }
         public override void Die()
         {

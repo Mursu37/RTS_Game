@@ -52,6 +52,7 @@ public class UnitFollowState : StateMachineBehaviour
 
               //  should unit transition to attack state?
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
+                Debug.Log(distanceFromTarget);
 
                 if (distanceFromTarget < unit.attackRange)
                 {
