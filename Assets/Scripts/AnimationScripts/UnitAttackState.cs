@@ -64,11 +64,8 @@ public class UnitAttackState : StateMachineBehaviour
             }
 
             // should unit still attack
-            float distanceFromTarget = Vector3.Distance(x.ClosestPoint(animator.transform.position), animator.transform.position);
-
-            if (distanceFromTarget > stopAttackingDistance || attackController.targetToAttack == null)
+            if (attackController.targetToAttack == null || Vector3.Distance(x.ClosestPoint(animator.transform.position), animator.transform.position) > stopAttackingDistance)
             {
-
                 animator.SetBool("isAttacking", false); // move back to follow state
             }
 

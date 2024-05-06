@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour, IDamageable, IPriority
     {
         movementSpeed = 6.5f;
         attackCooldown = 1f / attackSpeed;
-        CurrentHealth = MaxHealth - 50f;
+        CurrentHealth = MaxHealth;
         UpdateHealthUI();
         agent = GetComponent<NavMeshAgent>();
         SetupNavMeshAgent();

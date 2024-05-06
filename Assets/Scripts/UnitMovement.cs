@@ -102,6 +102,7 @@ public class UnitMovement : MonoBehaviour
 
     IEnumerator Repair()
     {
+        resourceText.text = "Repairing";
         yield return new WaitForFixedUpdate();
         while (_repairing)
         {
@@ -119,6 +120,7 @@ public class UnitMovement : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+        resourceText.text = "";
     }
     
     IEnumerator Gather()
