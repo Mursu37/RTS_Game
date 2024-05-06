@@ -256,7 +256,10 @@ public class UnitMovement : MonoBehaviour
             {
                 agent.stoppingDistance = 0.5f;
                 isCommandedToMove = true;
-                attackController.targetToAttack = null;
+                if (!this.CompareTag("Worker"))
+                {
+                    attackController.targetToAttack = null;
+                }
 
                 //fix for infantry movement without having to rewrite unit selection script
                 FixMovement infantryMovementFix = GetComponent<FixMovement>();
