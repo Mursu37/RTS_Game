@@ -507,15 +507,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.809234
+      value: 1.9435387
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.665781
+      value: -7.177807
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_LocalRotation.w
@@ -603,7 +603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_Name
-      value: worker_unit
+      value: Worker
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f2a61627e3064fc8adddae7ec1cc109, type: 3}
       propertyPath: m_Layer
@@ -753,9 +753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28ed74a9e98d93498ebddf7a7794f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackRange: 1
-  attackSpeed: 1
+  damage: 0
+  attackRange: 0
+  attackSpeed: 0
   movementSpeed: 5
   stopAttackDistance: 1.2
   attackCooldown: 0

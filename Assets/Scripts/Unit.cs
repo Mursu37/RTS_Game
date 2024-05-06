@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour, IDamageable, IPriority
     public int Priority { get; set; } = 5;
     public float MaxHealth { get; set; } = 75f;
     public float CurrentHealth { get; set; }
-    public float damage = 0f;
+    public float damage = 1f;
     public float attackRange = 1f;
     public float attackSpeed = 1f; // attacks per second
     public float movementSpeed = 2f;
