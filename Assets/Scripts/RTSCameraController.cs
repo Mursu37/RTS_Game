@@ -57,7 +57,7 @@ public class RTSCameraController : MonoBehaviour
         movementSpeed = normalSpeed;
 
         _camera = Camera.main;
-        _camera.fieldOfView = 25f;
+        _camera.fieldOfView = 30f;
     }
 
     private void Update()
@@ -83,8 +83,8 @@ public class RTSCameraController : MonoBehaviour
     {
         if (Input.mouseScrollDelta != Vector2.zero)
         {
-            float cameraSize = _camera.fieldOfView + Input.mouseScrollDelta.y * -0.5f;
-            if (cameraSize is <= 30 and >= 10)
+            float cameraSize = _camera.fieldOfView + Input.mouseScrollDelta.y * -1f;
+            if (cameraSize is <= 40 and >= 10)
             {
                 _camera.fieldOfView = cameraSize;
             }

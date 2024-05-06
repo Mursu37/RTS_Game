@@ -37,11 +37,7 @@ public class Buildable : MonoBehaviour
                     if (!worker.IsWorking()) _workerCount++;
                 }
             }
-
-            if (_workerCount > 0)
-            {
-                TimeToBuild -= Time.fixedDeltaTime;
-            }
+            TimeToBuild -= Time.fixedDeltaTime;
         }
     }
 }

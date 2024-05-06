@@ -7891,7 +7891,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 963194228}
   followTransform: {fileID: 0}
   moveWithKeyboad: 1
-  moveWithEdgeScrolling: 0
+  moveWithEdgeScrolling: 1
   moveWithMouseDrag: 1
   fastSpeed: 0.2
   normalSpeed: 0.1

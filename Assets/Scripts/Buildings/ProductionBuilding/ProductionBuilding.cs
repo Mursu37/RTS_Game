@@ -40,7 +40,7 @@ namespace Buildings.ProductionBuilding
 
             _healing = true;
             _healSpeed = 1f / 2f;
-            _healAmount = 1f;
+            _healAmount = 2f;
         }
         
         protected override void Start()
