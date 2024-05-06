@@ -39,9 +39,9 @@ namespace Enemy.Spawning
             // Time until first wave
             _untilNextWave = 45f;
             // Size of first wave. 10 = 2 bugs
-            _waveValue = 10;
+            _waveValue = 15;
             // Time between waves after first
-            _timeBetweenWaves = 45f;
+            _timeBetweenWaves = 40f;
             
             if(Instance != null && Instance != this)
             {
@@ -107,7 +107,7 @@ namespace Enemy.Spawning
             }
             
 
-            _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 2; // Change number at the end to separate spawns in wave less
+            _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 1.5f; // Change number at the end to separate spawns in wave less
         }
 
         
@@ -135,7 +135,7 @@ namespace Enemy.Spawning
             {
                 _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
-                _waveValue = (int) (_waveValue * 1.2f); // 1.2f default. change this to scale waves faster
+                _waveValue = (int) (_waveValue * 1.33f); // 1.2f default. change this to scale waves faster
                 StartCoroutine(spawnEnemies());
             }
         }

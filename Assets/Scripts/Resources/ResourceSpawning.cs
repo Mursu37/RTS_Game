@@ -34,6 +34,7 @@ namespace Resources
                 resourcePosition = _resourceSpawnLocations[index]
                     .transform.position;
                 Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
+                Destroy(_resourceSpawnLocations[index]);
                 _resourceSpawnLocations.RemoveAt(index);
             }
 

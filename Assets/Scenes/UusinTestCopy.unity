@@ -457,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1899183881088737870, guid: 05c0ccb5c50fd418992aa49c823abf8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.765502
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 1899183881088737870, guid: 05c0ccb5c50fd418992aa49c823abf8b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -465,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1899183881088737870, guid: 05c0ccb5c50fd418992aa49c823abf8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.251606
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 1899183881088737870, guid: 05c0ccb5c50fd418992aa49c823abf8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18942,7 +18942,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1980614040
 RectTransform:

@@ -62,12 +62,12 @@ namespace Enemy.BasicBug
         private void Awake()
         {
             MaxHealth = 75f;
-            aggroRange = 5f;
+            aggroRange = 7.5f;
             attackRange = 1.25f;
             attackSpeed = 0.625f;
-            attackDamage = 5f; // 4
+            attackDamage = 6f; // 4
             
-            movementSpeed = 5f;
+            movementSpeed = 5.5f;
             currentTargetPriorityValue = 1;
             
             agent = GetComponent<NavMeshAgent>();
