@@ -47,7 +47,7 @@ public class UnitFollowState : StateMachineBehaviour
             {
                 // moving unit towards enemy
                 agent.SetDestination(attackController.targetToAttack.position);
-                animator.transform.LookAt(attackController.targetToAttack);
+                //animator.transform.LookAt(attackController.targetToAttack);
 
 
               //  should unit transition to attack state?
