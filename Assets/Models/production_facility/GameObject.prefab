@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: m_Carve
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7138263033558742940, guid: 002518f2d19cc46908713ade58aee067, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138263033558742940, guid: 002518f2d19cc46908713ade58aee067, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7139549498402751269, guid: 002518f2d19cc46908713ade58aee067, type: 3}
       propertyPath: m_LocalScale.x
       value: 1368.4092
