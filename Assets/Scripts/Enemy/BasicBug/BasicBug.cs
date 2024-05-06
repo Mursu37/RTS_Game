@@ -61,11 +61,11 @@ namespace Enemy.BasicBug
 
         private void Awake()
         {
-            MaxHealth = 75f;
-            aggroRange = 7.5f;
+            MaxHealth = 100f;
+            aggroRange = 8f;
             attackRange = 1.25f;
             attackSpeed = 0.625f;
-            attackDamage = 6f; // 4
+            attackDamage = 7f; // 4
             
             movementSpeed = 5.5f;
             currentTargetPriorityValue = 1;

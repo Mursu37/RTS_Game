@@ -24,7 +24,8 @@ namespace Resources
             Vector3 resourcePosition = _closeResourceSpawnLocations[Random.Range(0, _closeResourceSpawnLocations.Length)]
                 .transform.position;
             Debug.Log(resourcePosition);
-            Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
+            var closeNode = Instantiate(_resourceNodePrefab, resourcePosition, Quaternion.identity);
+            closeNode.GetComponent<TitaniumNode>().SetNearNode();
             _resourceNodeCount--;
             
             // spawn resource node at some of the locations randomly

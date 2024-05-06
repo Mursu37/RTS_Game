@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 public class TitaniumNode : MonoBehaviour, IGatherable
 {
-    private int _resourcesBeforeDepletion = 600;
+    private int _resourcesBeforeDepletion = 500;
     public Resource ResourceType { get; set; } = Resource.Titanium;
     public int Gather()
     {
@@ -13,5 +13,10 @@ public class TitaniumNode : MonoBehaviour, IGatherable
             Destroy(gameObject);
         }
         return 1;
+    }
+
+    public void SetNearNode()
+    {
+        _resourcesBeforeDepletion = 275;
     }
 }
