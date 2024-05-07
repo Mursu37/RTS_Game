@@ -131,12 +131,10 @@ public class UnitMovement : MonoBehaviour
             if (_resourceCount >= _resourceLimit || _resourceNodeCollider == null)
             {
                 Vector3 depositionLocation = GetClosestDepositionLocation();
-                agent.SetDestination(depositionLocation - GetTargetDirection(depositionLocation));
+                agent.SetDestination(depositionLocation);
                 yield return new WaitForSeconds(0.1f);
-                Debug.Log(agent.remainingDistance);
-                Debug.Log(depositionLocation);
                 
-                if (agent.remainingDistance <= 0.5f)
+                if (agent.remainingDistance <= 1.5f && !agent.pathPending)
                 {
                     var resourceManager = ResourceManager.Instance;
                     resourceManager.AddResource(_resourceType ,_resourceCount);
@@ -160,7 +158,7 @@ public class UnitMovement : MonoBehaviour
             else
             {
                 yield return new WaitForFixedUpdate();
-                if (agent.remainingDistance > 0.5f)
+                if (agent.remainingDistance > 1.5f || agent.pathPending)
                 {
                     yield return new WaitForSeconds(0.1f);
                     continue;
@@ -225,7 +223,7 @@ public class UnitMovement : MonoBehaviour
             
             if (this.CompareTag("Worker") && Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Clickable")))
             {
-                agent.stoppingDistance = 0.5f;
+                agent.stoppingDistance = 1f;
                 isCommandedToMove = true;
                 _gathering = false;
                 _repairing = false;
@@ -271,51 +269,66 @@ public class UnitMovement : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                Vector3 moveDestination = hit.point;
-                int unitCount = selectedUnits.Count;
-                int rowCount = Mathf.CeilToInt(Mathf.Sqrt(unitCount));
-                int colCount = Mathf.CeilToInt((float)unitCount / rowCount);
-
-                // Calculate the spacing between units
-                float spacingX = 2f; // Adjust as needed
-                float spacingZ = 2f; // Adjust as needed
-                List<Vector3> movePositionList = new List<Vector3>();
-                for (int row = 0; row < rowCount; row++)
+                if (this.CompareTag("Worker"))
                 {
-                    for (int col = 0; col < colCount; col++)
+                    agent.stoppingDistance = 1f;
+                    isCommandedToMove = true;
+               
+                    agent.SetDestination(hit.point - GetTargetDirection(hit.point));
+                    _gathering = false;
+                    _repairing = false;
+                }
+                else
+                {
+                    Vector3 moveDestination = hit.point;
+                    int unitCount = selectedUnits.Count;
+                    int rowCount = Mathf.CeilToInt(Mathf.Sqrt(unitCount));
+                    int colCount = Mathf.CeilToInt((float)unitCount / rowCount);
+
+                    // Calculate the spacing between units
+                    float spacingX = 2f; // Adjust as needed
+                    float spacingZ = 2f; // Adjust as needed
+                    List<Vector3> movePositionList = new List<Vector3>();
+                    for (int row = 0; row < rowCount; row++)
                     {
-                        float posX = col * spacingX;
-                        float posZ = row * spacingZ;
-                        Vector3 position = moveDestination + new Vector3(posX, 0, posZ);
-                        movePositionList.Add(position);
+                        for (int col = 0; col < colCount; col++)
+                        {
+                            float posX = col * spacingX;
+                            float posZ = row * spacingZ;
+                            Vector3 position = moveDestination + new Vector3(posX, 0, posZ);
+                            movePositionList.Add(position);
+                        }
                     }
+
+                    int movePositionListIndex = 0;
+                    //Debug.Log("Contents of selectedUnits:");
+
+                    foreach (GameObject unit in selectedUnits)
+                    {
+                        //Debug.Log(unit.name);
+                        Debug.Log(movePositionList[movePositionListIndex]);
+                        if (unit.CompareTag("Worker")) continue;
+                        agent = unit.GetComponent<NavMeshAgent>();
+                        agent.SetDestination(movePositionList[movePositionListIndex]);
+                        movePositionListIndex = (movePositionListIndex + 1) % movePositionList.Count;
+
+                    }
+
+                    agent.stoppingDistance = 0.5f;
+                    isCommandedToMove = true;
+                    if (!this.CompareTag("Worker"))
+                    {
+                        attackController.targetToAttack = null;
+                    }
+
+                    //fix for infantry movement without having to rewrite unit selection script
+                    FixMovement infantryMovementFix = GetComponent<FixMovement>();
+                    if (infantryMovementFix != null) infantryMovementFix.isCommandedToMove = true;
+
+                    agent.SetDestination(hit.point - GetTargetDirection(hit.point));
+                    _gathering = false;
+                    _repairing = false;
                 }
-                int movePositionListIndex = 0;
-                //Debug.Log("Contents of selectedUnits:");
-
-                foreach (GameObject unit in selectedUnits)
-                {
-                    //Debug.Log(unit.name);
-                    //Debug.Log(movePositionList[movePositionListIndex]);
-                    agent = unit.GetComponent<NavMeshAgent>();
-                    agent.SetDestination(movePositionList[movePositionListIndex]);
-                    movePositionListIndex = (movePositionListIndex + 1) % movePositionList.Count;
-
-                }
-                agent.stoppingDistance = 0.5f;
-                isCommandedToMove = true;
-                if (!this.CompareTag("Worker"))
-                {
-                    attackController.targetToAttack = null;
-                }
-
-                //fix for infantry movement without having to rewrite unit selection script
-                FixMovement infantryMovementFix = GetComponent<FixMovement>();
-                if (infantryMovementFix != null) infantryMovementFix.isCommandedToMove = true;
-
-                agent.SetDestination(hit.point - GetTargetDirection(hit.point));
-                _gathering = false;
-                _repairing = false;
             }
         }
     }

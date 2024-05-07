@@ -152,7 +152,6 @@ namespace Buildings.ProductionBuilding
                     var unit = collider.GetComponent<Unit>();
                     if (unit != null && Vector3.Distance(transform.position, collider.transform.position) <= 14f)
                     {
-                        Debug.Log("hello");
                         if ((unit.CurrentHealth / unit.MaxHealth) >= 1f) continue;
                         target = unit;
                         targetCollider = collider;
