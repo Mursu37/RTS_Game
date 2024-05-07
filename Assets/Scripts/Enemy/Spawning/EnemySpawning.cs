@@ -107,7 +107,7 @@ namespace Enemy.Spawning
             }
             
 
-            _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 3f; // Change number at the end to separate spawns in wave less
+            _timeBetweenSpawns = (_untilNextWave / _enemiesToSpawn.Count) / 4f; // Change number at the end to separate spawns in wave less
         }
 
         
@@ -135,7 +135,7 @@ namespace Enemy.Spawning
             {
                 _untilNextWave = _timeBetweenWaves;
                 GenerateWave(_waveValue);
-                _waveValue = (int) (_waveValue * 1.1f + 5f); // 1.2f default. change this to scale waves faster
+                _waveValue = (int) (_waveValue * 1.15f + 5f); // 1.2f default. change this to scale waves faster
                 StartCoroutine(spawnEnemies());
             }
         }
